@@ -70,8 +70,7 @@ void special(int key, int, int) {
 	glutPostRedisplay();
 }
 
-// Initializes GLUT and enters the main loop.
-int main(int argc, char** argv) {
+void simulate(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(80, 80);
@@ -83,4 +82,9 @@ int main(int argc, char** argv) {
 	glutTimerFunc(100, timer, 0);
 	init();
 	glutMainLoop();
+}
+
+// Initializes GLUT and enters the main loop.
+int main(int argc, char** argv) {
+	simulate(argc, argv); 
 }

@@ -2,51 +2,13 @@
 #include <cmath>
 #include "Camera.h"
 #include "testObject.h"
+#include "Checkerboard.h"
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
 GLfloat RED[] = { 1, 0, 0 };
 GLfloat GREEN[] = { 0, 1, 0 };
 GLfloat MAGENTA[] = { 1, 0, 1 };
-
-
-// A checkerboard class.  A checkerboard has alternating red and white
-// squares.  The number of squares is set in the constructor.  Each square
-// is 1 x 1.  One corner of the board is (0, 0) and the board stretches out
-// along positive x and positive z.  It rests on the xz plane.  I put a
-// spotlight at (4, 3, 7).
-class Checkerboard {
-	int displayListId;
-	int width;
-	int depth;
-public:
-	Checkerboard(int width, int depth) : width(width), depth(depth) {}
-	double centerx() { return 0; }
-	double centerz() { return 0; }
-	void create() {
-		displayListId = glGenLists(1);
-		glNewList(displayListId, GL_COMPILE);
-		GLfloat lightPosition[] = { 4, 3, 7, 1 };
-		glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
-		glBegin(GL_QUADS);
-		glNormal3d(0, 1, 0);
-		for (int x = -width/2; x < width/2; x++) {
-			for (int z = -depth/2; z < depth/2; z++) {
-				glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE,
-					(x + z) % 2 == 0 ? RED : WHITE);
-				glVertex3d(x, 0, z);
-				glVertex3d(x + 1, 0, z);
-				glVertex3d(x + 1, 0, z + 1);
-				glVertex3d(x, 0, z + 1);
-			}
-		}
-		glEnd();
-		glEndList();
-	}
-	void draw() {
-		glCallList(displayListId);
-	}
-};
 
 // Global variables: a camera, a checkerboard and some balls.
 Checkerboard checkerboard(8, 8);

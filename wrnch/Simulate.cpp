@@ -1,41 +1,13 @@
 #include <gl/freeglut.h>
 #include <cmath>
 #include "Camera.h"
+#include "testObject.h"
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
 GLfloat RED[] = { 1, 0, 0 };
 GLfloat GREEN[] = { 0, 1, 0 };
 GLfloat MAGENTA[] = { 1, 0, 1 };
-
-
-
-class testObject {
-	GLfloat radius; 
-	int slices; 
-	int stacks; 
-	double x;
-	double y = 4; 
-	double z; 
-	double time = 0; 
-
-public: 
-	testObject(GLfloat r, int sl, int st, double x, double y, double z) : 
-		radius(r), slices(sl), stacks(st), x(x), y(y), z(z) {}
-	void update() {
-		time += 0.01; 
-		x = sin(time); 
-		z = cos(time); 
-
-		glPushMatrix();
-		// Rotate so y is vertical on the xz plane
-		//glRotatef(-90.0, 1.0, 0.0, 0.0);
-		glTranslated(x, y, z);
-		// Translate to current position
-		glutWireSphere(radius, slices, stacks);
-		glPopMatrix();
-	}
-};
 
 
 // A checkerboard class.  A checkerboard has alternating red and white

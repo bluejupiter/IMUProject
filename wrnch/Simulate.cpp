@@ -40,8 +40,8 @@ public:
 		radius(r), slices(sl), stacks(st), x(x), y(y), z(z) {}
 	void update() {
 		time += 0.01; 
-		x = sin(time) + 5; 
-		z = cos(time) + 5; 
+		x = sin(time); 
+		z = cos(time); 
 
 		glPushMatrix();
 		// Rotate so y is vertical on the xz plane
@@ -65,8 +65,8 @@ class Checkerboard {
 	int depth;
 public:
 	Checkerboard(int width, int depth) : width(width), depth(depth) {}
-	double centerx() { return width / 2; }
-	double centerz() { return depth / 2; }
+	double centerx() { return 0; }
+	double centerz() { return 0; }
 	void create() {
 		displayListId = glGenLists(1);
 		glNewList(displayListId, GL_COMPILE);
@@ -74,8 +74,8 @@ public:
 		glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 		glBegin(GL_QUADS);
 		glNormal3d(0, 1, 0);
-		for (int x = 0; x < width - 1; x++) {
-			for (int z = 0; z < depth - 1; z++) {
+		for (int x = -width/2; x < width/2; x++) {
+			for (int z = -depth/2; z < depth/2; z++) {
 				glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE,
 					(x + z) % 2 == 0 ? RED : WHITE);
 				glVertex3d(x, 0, z);
@@ -158,7 +158,7 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(80, 80);
 	glutInitWindowSize(800, 600);
-	glutCreateWindow("Bouncing Balls");
+	glutCreateWindow("Simulation");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutSpecialFunc(special);

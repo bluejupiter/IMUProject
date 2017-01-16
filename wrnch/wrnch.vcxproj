@@ -110,7 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="Simulate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

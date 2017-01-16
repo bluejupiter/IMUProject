@@ -25,38 +25,34 @@ public:
 	void moveDown() { if (y > dy) y -= dy; }
 };
 
-// A ball.  A ball has a radius, a color, and bounces up and down between
-// a maximum height and the xz plane.  Therefore its x and z coordinates
-// are fixed.  It uses a lame bouncing algorithm, simply moving up or
-// down by 0.05 units at each frame.
-class Ball {
-	double radius;
-	GLfloat* color;
-	double maximumHeight;
+
+class testObject {
+	GLfloat radius; 
+	int slices; 
+	int stacks; 
 	double x;
-	double y;
-	double z;
-	int direction;
-public:
-	Ball(double r, GLfloat* c, double h, double x, double z) :
-		radius(r), color(c), maximumHeight(h), direction(-1),
-		y(h), x(x), z(z) {
-	}
+	double y = 4; 
+	double z; 
+	double time = 0; 
+
+public: 
+	testObject(GLfloat r, int sl, int st, double x, double y, double z) : 
+		radius(r), slices(sl), stacks(st), x(x), y(y), z(z) {}
 	void update() {
-		y += direction * 0.05;
-		if (y > maximumHeight) {
-			y = maximumHeight; direction = -1;
-		}
-		else if (y < radius) {
-			y = radius; direction = 1;
-		}
+		time += 0.01; 
+		x = sin(time) + 5; 
+		z = cos(time) + 5; 
+
 		glPushMatrix();
-		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
+		// Rotate so y is vertical on the xz plane
+		//glRotatef(-90.0, 1.0, 0.0, 0.0);
 		glTranslated(x, y, z);
-		glutSolidSphere(radius, 30, 30);
+		// Translate to current position
+		glutWireSphere(radius, slices, stacks);
 		glPopMatrix();
 	}
 };
+
 
 // A checkerboard class.  A checkerboard has alternating red and white
 // squares.  The number of squares is set in the constructor.  Each square
@@ -99,11 +95,7 @@ public:
 // Global variables: a camera, a checkerboard and some balls.
 Checkerboard checkerboard(8, 8);
 Camera camera;
-Ball balls[] = {
-	Ball(1, GREEN, 7, 6, 1),
-	Ball(1.5, MAGENTA, 6, 3, 4),
-	Ball(0.4, WHITE, 5, 1, 7)
-};
+testObject test(0.5, 8, 8, 0, 1, 0);
 
 
 // Application-specific initialization: Set up global lighting parameters
@@ -128,9 +120,7 @@ void display() {
 		checkerboard.centerx(), 0.0, checkerboard.centerz(),
 		0.0, 1.0, 0.0);
 	checkerboard.draw();
-	for (int i = 0; i < sizeof balls / sizeof(Ball); i++) {
-		balls[i].update();
-	}
+	test.update(); 
 	glFlush();
 	glutSwapBuffers();
 }
@@ -158,7 +148,7 @@ void special(int key, int, int) {
 	case GLUT_KEY_RIGHT: camera.moveRight(); break;
 	case GLUT_KEY_UP: camera.moveUp(); break;
 	case GLUT_KEY_DOWN: camera.moveDown(); break;
-	}
+	} 
 	glutPostRedisplay();
 }
 

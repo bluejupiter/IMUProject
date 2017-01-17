@@ -19,10 +19,6 @@ void testObject::update() {
 	glTranslated(x, y, z);
 	glutWireSphere(radius, slices, stacks);
 	glPopMatrix();
-
-	updateTrace(x, y, z);
-	drawTrace(); 
-
 }
 
 void testObject::updateTrace(double x, double y, double z) {

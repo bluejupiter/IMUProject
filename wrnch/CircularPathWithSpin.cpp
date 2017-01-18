@@ -32,6 +32,6 @@ double CircularPathWithSpin::wX() { return 0; }
 double CircularPathWithSpin::wY() { return 0; }
 double CircularPathWithSpin::wZ() { return 0; }
 
-void CircularPathWithSpin::increment(double seconds) {
-	clock->tick(seconds);
+void CircularPathWithSpin::increment() {
+	clock->tick();
 }

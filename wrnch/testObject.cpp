@@ -8,7 +8,7 @@ testObject::testObject(GLfloat r, int sl, int st, Path * p, MockIMU * i) :
 	radius(r), slices(sl), stacks(st), path(p), imu(i) {}
 
 void testObject::update() {
-	path->increment(0.01); 
+	path->increment(); 
 
 	glPushMatrix();
 	glRotated(-90, 1, 0, 0);		// Make z vector vertical instead of y

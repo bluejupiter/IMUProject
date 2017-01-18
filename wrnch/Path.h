@@ -20,6 +20,6 @@ public:
 	virtual double wY() = 0;		//angular velocity about the object's y-axis
 	virtual double wZ() = 0;		//angular velocity about the object's z-axis
 
-	virtual void increment(double) = 0; 
+	virtual void increment() = 0; 
 };
 

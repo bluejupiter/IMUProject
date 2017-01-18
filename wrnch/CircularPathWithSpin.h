@@ -16,5 +16,5 @@ public:
 	double wY();
 	double wZ();
 
-	void increment(double); 
+	void increment(); 
 };

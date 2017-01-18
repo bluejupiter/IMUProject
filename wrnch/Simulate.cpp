@@ -4,6 +4,7 @@
 #include "testObject.h"
 #include "Checkerboard.h"
 #include "CircularPathWithSpin.h"
+#include "Clock.h"
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
@@ -89,5 +90,6 @@ void simulate(int argc, char** argv) {
 
 // Initializes GLUT and enters the main loop.
 int main(int argc, char** argv) {
+	Clock::setIncrement(0.01); 
 	simulate(argc, argv); 
 }

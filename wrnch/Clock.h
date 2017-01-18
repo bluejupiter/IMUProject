@@ -7,10 +7,11 @@ private:
 	static Clock* INSTANCE; 
 	Clock();
 public: 
+	static double increment;
 	static Clock* getInstance(); 
 	~Clock() { instanceFlag = false; }
-	void tick(double); 
+	void tick(); 
 	void reset() { timeInSeconds = 0; };
 	double getTime() { return timeInSeconds; };
+	static void setIncrement(double seconds); 
 };
-

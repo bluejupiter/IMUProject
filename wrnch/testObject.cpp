@@ -5,17 +5,15 @@
 
 
 testObject::testObject(GLfloat r, int sl, int st, double x, double y, double z, Path * p) :
-	radius(r), slices(sl), stacks(st), x(x), y(y), z(z), pointsCount(0), fullTrace(false), path(p) {
-	time = Clock::getInstance(); 
-}
+	radius(r), slices(sl), stacks(st), x(x), y(y), z(z), pointsCount(0), fullTrace(false), path(p) {}
 
 void testObject::update() {
-	time->tick(0.01);
+	path->increment(0.01); 
 
 	glPushMatrix();
 	glRotated(-90, 1, 0, 0);		// Make z vector vertical instead of y
-	glTranslated(path->rX(), path->rY(), path->rZ()); 
-	glRotated(path->thetaX(), 1, 0, 0);
+	glTranslated(path->rX(), path->rY(), path->rZ());	//Move to current location
+	glRotated(path->thetaX(), 1, 0, 0);					//Rotate object according to orientation
 	glutWireSphere(radius, slices, stacks);
 	glPopMatrix();
 }

@@ -11,7 +11,6 @@ class testObject {
 	double y = 4;
 	double z;
 	Path * path; 
-	Clock * time;
 
 	//Path tracing - disabled
 	double pointsTrace[100][3];

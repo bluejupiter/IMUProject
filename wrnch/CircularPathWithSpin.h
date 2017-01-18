@@ -18,4 +18,6 @@ public:
 	double wX();
 	double wY();
 	double wZ();
+
+	void increment(double); 
 };

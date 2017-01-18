@@ -27,4 +27,7 @@ public:
 	virtual double wX() = 0;		//angular velocity about the object's x-axis
 	virtual double wY() = 0;		//angular velocity about the object's y-axis
 	virtual double wZ() = 0;		//angular velocity about the object's z-axis
+
+	virtual void increment(double) = 0; 
 };
+

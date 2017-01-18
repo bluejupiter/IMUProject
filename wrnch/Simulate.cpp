@@ -15,7 +15,7 @@ GLfloat MAGENTA[] = { 1, 0, 1 };
 Checkerboard checkerboard(8, 8);
 Camera camera;
 CircularPathWithSpin path; 
-testObject test(0.5, 8, 8, 0, 1, 0, &path);
+testObject test(0.5, 8, 8, &path);
 
 
 // Application-specific initialization: Set up global lighting parameters

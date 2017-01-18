@@ -4,8 +4,8 @@
 #include <cmath>
 
 
-testObject::testObject(GLfloat r, int sl, int st, double x, double y, double z, Path * p) :
-	radius(r), slices(sl), stacks(st), x(x), y(y), z(z), pointsCount(0), fullTrace(false), path(p) {}
+testObject::testObject(GLfloat r, int sl, int st, Path * p) :
+	radius(r), slices(sl), stacks(st), path(p) {}
 
 void testObject::update() {
 	path->increment(0.01); 
@@ -18,7 +18,7 @@ void testObject::update() {
 	glPopMatrix();
 }
 
-void testObject::updateTrace(double x, double y, double z) {
+/*void testObject::updateTrace(double x, double y, double z) {
 	pointsTrace[pointsCount][0] = x; 
 	pointsTrace[pointsCount][1] = y;
 	pointsTrace[pointsCount][2] = z;
@@ -38,4 +38,4 @@ void testObject::drawTrace() {
 	else
 		glDrawArrays(GL_POINTS, 0, 99);
 
-}
+}*/

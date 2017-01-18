@@ -4,19 +4,16 @@
 #include <cmath>
 
 
-testObject::testObject(GLfloat r, int sl, int st, double x, double y, double z) :
-	radius(r), slices(sl), stacks(st), x(x), y(y), z(z), pointsCount(0), fullTrace(false) {
+testObject::testObject(GLfloat r, int sl, int st, double x, double y, double z, Path * p) :
+	radius(r), slices(sl), stacks(st), x(x), y(y), z(z), pointsCount(0), fullTrace(false), path(p) {
 	time = Clock::getInstance(); 
 }
 
 void testObject::update() {
 	time->tick(0.01);
-	x = 2*sin(time->getTime());
-	z = 2*cos(time->getTime());
 
 	glPushMatrix();
-	glRotated(time->getTime()*100, 0, 1, 0); 
-	glTranslated(x, y, z);
+	glTranslated(path->rX(), path->rZ(), path->rY()); //Note that y and z axis are switched (y is up for OpenGL, z is up for our math)
 	glutWireSphere(radius, slices, stacks);
 	glPopMatrix();
 }

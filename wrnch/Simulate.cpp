@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "testObject.h"
 #include "Checkerboard.h"
+#include "CircularPathWithSpin.h"
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
@@ -13,7 +14,8 @@ GLfloat MAGENTA[] = { 1, 0, 1 };
 // Global variables: a camera, a checkerboard and some balls.
 Checkerboard checkerboard(8, 8);
 Camera camera;
-testObject test(0.5, 8, 8, 0, 1, 0);
+CircularPathWithSpin path; 
+testObject test(0.5, 8, 8, 0, 1, 0, &path);
 
 
 // Application-specific initialization: Set up global lighting parameters

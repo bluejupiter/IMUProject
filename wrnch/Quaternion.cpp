@@ -23,3 +23,7 @@ Quaternion & Quaternion::operator*(const Quaternion & q2)
 	Quaternion result(wNew, xNew, yNew, zNew); 
 	return result; 
 }
+
+void Quaternion::set(double wNew, double xNew, double yNew, double zNew) {
+	x = xNew; y = yNew; z = zNew; w = wNew; 
+};

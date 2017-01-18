@@ -12,5 +12,6 @@ public:
 	Quaternion(double x, double y, double z, double w) : x(x), y(y), z(z), w(w) {};
 	void normalize(); 
 	Quaternion& operator * (const Quaternion&); 
+	void set(double w, double x, double y, double z); 
 
 };

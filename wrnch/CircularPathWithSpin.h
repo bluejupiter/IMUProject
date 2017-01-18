@@ -8,9 +8,6 @@ public:
 	double rX(); 
 	double rY();
 	double rZ();
-	double thetaX();
-	double thetaY();
-	double thetaZ();
 
 	double xAcc();
 	double yAcc();

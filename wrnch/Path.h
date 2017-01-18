@@ -11,9 +11,6 @@ public:
 	virtual double rX() = 0;		//x coordinate in global frame
 	virtual double rY() = 0;		//y coordinate in global frame
 	virtual double rZ() = 0;		//z coordinate in global frame 
-	virtual double thetaX() = 0;	//Angle between the objects x-axis and the global frame's x-axis
-	virtual double thetaY() = 0;	//Angle between the objects x-axis and the global frame's x-axis
-	virtual double thetaZ() = 0;	//Angle between the objects x-axis and the global frame's x-axis
 
 	// For accelerometer to collect
 	virtual double xAcc() = 0;		//x-axis Acceleration in the object's frame

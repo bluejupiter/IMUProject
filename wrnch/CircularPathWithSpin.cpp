@@ -28,10 +28,6 @@ double CircularPathWithSpin::zAcc() {
 	return -9.81; 
 }
 
-double CircularPathWithSpin::thetaX() { return 6.28 * clock->getTime(); }
-double CircularPathWithSpin::thetaY() { return 0;  }
-double CircularPathWithSpin::thetaZ() { return 0;  }
-
 double CircularPathWithSpin::wX() { return 0; }
 double CircularPathWithSpin::wY() { return 0; }
 double CircularPathWithSpin::wZ() { return 0; }

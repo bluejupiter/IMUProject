@@ -13,7 +13,9 @@ void testObject::update() {
 	time->tick(0.01);
 
 	glPushMatrix();
+	
 	glTranslated(path->rX(), path->rZ(), path->rY()); //Note that y and z axis are switched (y is up for OpenGL, z is up for our math)
+	glRotated(path->thetaX(), 1, 0, 0);
 	glutWireSphere(radius, slices, stacks);
 	glPopMatrix();
 }

@@ -114,6 +114,7 @@
     <ClCompile Include="Checkerboard.cpp" />
     <ClCompile Include="CircularPathWithSpin.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Simulate.cpp" />
     <ClCompile Include="testObject.cpp" />
   </ItemGroup>
@@ -126,6 +127,7 @@
     <ClInclude Include="CircularPathWithSpin.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Path.h" />
+    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="testObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

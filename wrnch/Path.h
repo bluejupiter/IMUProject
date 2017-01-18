@@ -1,10 +1,11 @@
 #pragma once
 #include "Clock.h";
+#include "Quaternion.h"
 
 class Path {
 public:
-	double quaternion[4]; 
 	Clock * clock; 
+	Quaternion quat; 
 
 	Path() { clock = Clock::getInstance(); };
 	virtual double rX() = 0;		//x coordinate in global frame

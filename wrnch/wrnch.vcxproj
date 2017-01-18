@@ -115,6 +115,7 @@
     <ClCompile Include="CircularPathWithSpin.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="MockIMU.cpp" />
+    <ClCompile Include="OrientationEstimator.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Simulate.cpp" />
     <ClCompile Include="testObject.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="CircularPathWithSpin.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="MockIMU.h" />
+    <ClInclude Include="OrientationEstimator.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="testObject.h" />

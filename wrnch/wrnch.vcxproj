@@ -118,6 +118,7 @@
     <ClCompile Include="OrientationEstimator.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Simulate.cpp" />
+    <ClCompile Include="SpinOnly.cpp" />
     <ClCompile Include="testObject.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +133,7 @@
     <ClInclude Include="OrientationEstimator.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="SpinOnly.h" />
     <ClInclude Include="testObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

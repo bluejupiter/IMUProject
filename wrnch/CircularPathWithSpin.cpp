@@ -3,15 +3,6 @@
 
 CircularPathWithSpin::CircularPathWithSpin() {
 
-	// Start simulation with object orientation matching global orientation 
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			if (i != j)
-				realDCM[i][j] = 0.0;
-			else
-				realDCM[i][j] = 1.0; 
-		}
-	}
 
 }
 

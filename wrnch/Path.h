@@ -3,13 +3,7 @@
 
 class Path {
 public:
-	double x;
-	double y;
-	double z;
-	double pitch;
-	double yaw;
-	double tilt;
-	double realDCM[3][3]; 
+	double quaternion[4]; 
 	Clock * clock; 
 
 	Path() { clock = Clock::getInstance(); };

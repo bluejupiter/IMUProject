@@ -6,6 +6,7 @@
 #include "CircularPathWithSpin.h"
 #include "Clock.h"
 #include "SpinOnly.h"
+#include <iostream>
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
@@ -90,8 +91,30 @@ void simulate(int argc, char** argv) {
 	glutMainLoop();
 }
 
+std::string convert(Quaternion q) {
+	double angle = 2 * acos(q.w) * 180/3.14;
+	double s = sqrt(1 - q.w * q.w);
+	if (s < 0)
+		s *= -1; 
+	return "(" + std::to_string(angle) + ", " + std::to_string(q.x / s) + ", " + std::to_string(q.y / s) + ", " + std::to_string(q.z / s) + ")\n"; 
+}
 // Initializes GLUT and enters the main loop.
 int main(int argc, char** argv) {
 	Clock::setIncrement(0.01); 
 	simulate(argc, argv); 
+
+	/*
+	Quaternion start(1, 0, 0, 0); 
+	Quaternion rotate(cos(0.05), 0, 0, sin(0.05));
+	std::cout << "Start Quaternion is: " + start.toString(); 
+	std::cout << "Rotate Quaternion is: " + rotate.toString(); 
+	for (int i = 0; i < 80; i++) {
+		start = rotate * start; 
+		std::cout << "\n"; 
+		std::cout << "Quaternion is now: " + start.toString(); 
+		std::cout << "Rotated vector is now: " + convert(start); 
+	}
+	system("pause");
+
+	*/
 }

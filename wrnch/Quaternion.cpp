@@ -10,8 +10,6 @@ void Quaternion::normalize() {
 		y /= magnitude; 
 		z /= magnitude; 
 	}
-
-
 }
 
 Quaternion & Quaternion::operator*(const Quaternion & q2)
@@ -25,5 +23,10 @@ Quaternion & Quaternion::operator*(const Quaternion & q2)
 }
 
 void Quaternion::set(double wNew, double xNew, double yNew, double zNew) {
-	x = xNew; y = yNew; z = zNew; w = wNew; 
+	w = wNew; x = xNew; y = yNew; z = zNew;
 };
+
+std::string Quaternion::toString() {
+	std::string output = "(" + std::to_string(w) + ", " + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")\n"; 
+	return output; 
+}

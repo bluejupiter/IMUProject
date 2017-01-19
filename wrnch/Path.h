@@ -1,6 +1,7 @@
 #pragma once
 #include "Clock.h";
 #include "Quaternion.h"
+#include <vector>
 
 class Path {
 public:
@@ -19,6 +20,8 @@ public:
 	virtual double wX() = 0;		//angular velocity about the object's x-axis
 	virtual double wY() = 0;		//angular velocity about the object's y-axis
 	virtual double wZ() = 0;		//angular velocity about the object's z-axis
+
+	std::vector<double> convertQuaternionForGl(); 
 
 	virtual void increment() = 0; 
 };

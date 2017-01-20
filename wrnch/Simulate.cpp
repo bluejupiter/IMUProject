@@ -18,9 +18,10 @@ GLfloat MAGENTA[] = { 1, 0, 1 };
 Checkerboard checkerboard(8, 8);
 Camera camera;
 Clock * clock = Clock::getInstance(); 
-//CircularPathWithSpin path; 
+
+//Add path to object and corresponding imu
 SpinOnly path; 
-MockIMU imu(&path); 
+MockIMU imuX(&path); 
 testObject test(0.5, 8, 8, &path);
 
 

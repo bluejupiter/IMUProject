@@ -7,6 +7,7 @@ class Path {
 public:
 	Clock * clock; 
 	Quaternion quat; 
+	Quaternion previous; 
 
 	Path() { clock = Clock::getInstance(); };
 	virtual double rX() = 0;		//x coordinate in global frame

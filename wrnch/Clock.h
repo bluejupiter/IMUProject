@@ -15,3 +15,4 @@ public:
 	double getTime() { return timeInSeconds; };
 	static void setIncrement(double seconds); 
 };
+

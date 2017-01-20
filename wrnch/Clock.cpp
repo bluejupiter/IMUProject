@@ -3,7 +3,7 @@
 Clock* Clock::INSTANCE = nullptr;
 
 bool Clock::instanceFlag = false;
-double Clock::increment = 0.01; 
+double Clock::increment = (1.0/30.0); // default
 
 Clock::Clock() : timeInSeconds(0) {};
 
@@ -22,6 +22,7 @@ void Clock::tick() {
 }
 
 void Clock::setIncrement(double seconds) { increment = seconds; }
+
 
 
 

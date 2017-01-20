@@ -103,7 +103,7 @@ std::string convert(Quaternion q) {
 }
 // Initializes GLUT and enters the main loop.
 int main(int argc, char** argv) {
-	Clock::setIncrement(1/30); 
+
 	simulate(argc, argv); 
 
 	/*
@@ -119,5 +119,14 @@ int main(int argc, char** argv) {
 	}
 	system("pause");
 
+	
+
+	SpinOnly spin; 
+	std::cout << "Increment is " + std::to_string(Clock::increment); 
+	std::cout << "Start Quaternion is: " + spin.quat.toString();
+	std::cout << "Rotate Quaternion is: " + spin.change.toString();
+	std::cout << "\nAngular velocities are: \n\t wX = " + std::to_string(spin.wX()) + "\n\t wY = " + std::to_string(spin.wY()) + "\n\t wZ = " + std::to_string(spin.wZ()); 
+
+	system("pause"); 
 	*/
 }

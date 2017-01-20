@@ -12,9 +12,6 @@ public:
 	double xAcc();
 	double yAcc();
 	double zAcc();
-	double wX();
-	double wY();
-	double wZ();
 
 	void update();
 };

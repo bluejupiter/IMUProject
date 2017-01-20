@@ -3,13 +3,13 @@
 #include "Quaternion.h"
 #include <vector>
 
-class Path {
+class Motion {
 public:
 	Clock * clock; 
 	Quaternion quat; 
 	Quaternion change; 
 
-	Path() { clock = Clock::getInstance(); };
+	Motion() { clock = Clock::getInstance(); };
 	virtual double rX() = 0;		//x coordinate in global frame
 	virtual double rY() = 0;		//y coordinate in global frame
 	virtual double rZ() = 0;		//z coordinate in global frame 

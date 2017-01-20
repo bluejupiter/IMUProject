@@ -5,7 +5,7 @@
 #include <vector>
 
 
-testObject::testObject(GLfloat r, int sl, int st, Path * p) :
+testObject::testObject(GLfloat r, int sl, int st, Motion * p) :
 	radius(r), slices(sl), stacks(st), path(p) {}
 
 void testObject::update() {

@@ -1,7 +1,7 @@
 #include "MockIMU.h"
 #include <random>
 
-MockIMU::MockIMU(Path * p) : path(p) {}
+MockIMU::MockIMU(Motion * p) : path(p) {}
 
 double MockIMU::error() {
 	double r = ((double)rand() / (RAND_MAX));	// 0 < r < 1

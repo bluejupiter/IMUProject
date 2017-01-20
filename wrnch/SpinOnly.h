@@ -1,7 +1,7 @@
 #pragma once
 #include "Path.h"
 
-class SpinOnly : public Path {
+class SpinOnly : public Motion {
 public:
 	SpinOnly();
 

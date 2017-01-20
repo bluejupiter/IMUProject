@@ -8,10 +8,10 @@ class testObject {
 	GLfloat radius;
 	int slices;
 	int stacks;
-	Path * path;
+	Motion * path;
 
 public:
-	testObject(GLfloat r, int sl, int st, Path * p);
+	testObject(GLfloat r, int sl, int st, Motion * p);
 	void update();
 
 	//Path tracing - disabled

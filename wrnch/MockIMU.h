@@ -2,10 +2,10 @@
 #include "Path.h"
 
 class MockIMU {
-	Path * path; 
+	Motion * path; 
 
 public: 
-	MockIMU(Path * p); 
+	MockIMU(Motion * p); 
 	
 	double xAcc();		//x-axis Acceleration in the object's frame
 	double yAcc();		//y-axis Acceleration in the object's frame

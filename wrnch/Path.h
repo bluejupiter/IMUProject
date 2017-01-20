@@ -23,6 +23,6 @@ public:
 
 	std::vector<double> convertQuaternionForGl(); 
 
-	virtual void increment() = 0; 
+	virtual void update() = 0; 
 };
 

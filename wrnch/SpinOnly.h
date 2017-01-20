@@ -16,7 +16,5 @@ public:
 	double wY();
 	double wZ();
 
-	std::vector<double> convertQuaternionForGl(); 
-
-	void increment();
+	void update();
 };

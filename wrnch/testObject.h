@@ -8,11 +8,10 @@ class testObject {
 	GLfloat radius;
 	int slices;
 	int stacks;
-	Path * path; 
-	MockIMU * imu; 
+	Path * path;
 
 public:
-	testObject(GLfloat r, int sl, int st, Path * p, MockIMU * imu);
+	testObject(GLfloat r, int sl, int st, Path * p);
 	void update();
 
 	//Path tracing - disabled

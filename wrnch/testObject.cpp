@@ -5,11 +5,11 @@
 #include <vector>
 
 
-testObject::testObject(GLfloat r, int sl, int st, Path * p, MockIMU * i) :
-	radius(r), slices(sl), stacks(st), path(p), imu(i) {}
+testObject::testObject(GLfloat r, int sl, int st, Path * p) :
+	radius(r), slices(sl), stacks(st), path(p) {}
 
 void testObject::update() {
-	path->increment(); 
+	path->update(); 
 	std::vector<double> rotation = path->convertQuaternionForGl(); 
 
 	glPushMatrix();

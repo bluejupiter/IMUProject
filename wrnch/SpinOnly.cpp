@@ -19,8 +19,7 @@ double SpinOnly::wX() { return 0; };
 double SpinOnly::wY() { return 0; };
 double SpinOnly::wZ() { return 0.04; }; //Spin about z axis at 0.04 rad/s
 
-void SpinOnly::increment() {
-	clock->tick();
+void SpinOnly::update() {
 	Quaternion previousChange(cos(0.02), 0, 0, sin(0.02));
 	quat = previousChange * quat; 
 }

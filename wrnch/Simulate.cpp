@@ -17,10 +17,11 @@ GLfloat MAGENTA[] = { 1, 0, 1 };
 // Global variables: a camera, a checkerboard and some balls.
 Checkerboard checkerboard(8, 8);
 Camera camera;
+Clock * clock = Clock::getInstance(); 
 //CircularPathWithSpin path; 
 SpinOnly path; 
 MockIMU imu(&path); 
-testObject test(0.5, 8, 8, &path, &imu);
+testObject test(0.5, 8, 8, &path);
 
 
 // Application-specific initialization: Set up global lighting parameters
@@ -39,6 +40,7 @@ void init() {
 // Draws one frame, the checkerboard then the balls, from the current camera
 // position.
 void display() {
+	clock->tick(); 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	gluLookAt(camera.getX(), camera.getY(), camera.getZ(),
@@ -100,7 +102,7 @@ std::string convert(Quaternion q) {
 }
 // Initializes GLUT and enters the main loop.
 int main(int argc, char** argv) {
-	Clock::setIncrement(0.01); 
+	Clock::setIncrement(1/30); 
 	simulate(argc, argv); 
 
 	/*

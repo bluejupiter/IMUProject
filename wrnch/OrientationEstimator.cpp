@@ -2,10 +2,11 @@
 #include "MockIMU.h"
 #include <math.h>
 #include <iostream>
+#include "Clock.h"
 using std::vector; 
 
 OrientationEstimator::OrientationEstimator(MockIMU * i) : imu(i) {
-	timeIncrement = 0.01; 
+	timeIncrement = Clock::increment; 
 
 	//CREATE INITIAL DCM MATRIX DCM = {North, West, Zenith}^T
 	// Zenith is opposite of Gravity. Assume other acceleration is small compared to gravity

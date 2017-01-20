@@ -5,6 +5,7 @@
 
 SpinOnly::SpinOnly() {
 	quat.set(1, 0, 0, 0); // w,x,y,z
+	change.set(cos(0.02), 0, 0, sin(0.02)); 
 }; 
 
 
@@ -20,7 +21,6 @@ double SpinOnly::wY() { return 0; };
 double SpinOnly::wZ() { return 0.04; }; //Spin about z axis at 0.04 rad/s
 
 void SpinOnly::update() {
-	Quaternion previousChange(cos(0.02), 0, 0, sin(0.02));
-	quat = previousChange * quat; 
+	quat = change * quat; 
 }
 

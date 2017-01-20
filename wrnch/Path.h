@@ -18,9 +18,9 @@ public:
 	virtual double xAcc() = 0;		//x-axis Acceleration in the object's frame
 	virtual double yAcc() = 0;		//y-axis Acceleration in the object's frame
 	virtual double zAcc() = 0;		//z-axis Acceleration in the object's frame
-	double wX();		//angular velocity about the object frame's x-axis (based on rate of change of quaternion)
-	double wY();		//angular velocity about the object frame's y-axis
-	double wZ();		//angular velocity about the object frame's z-axis
+	double wX();		//angular velocity about the object frame's x-axis (rad/s)
+	double wY();		//angular velocity about the object frame's y-axis (rad/s)
+	double wZ();		//angular velocity about the object frame's z-axis (rad/s)
 
 	// Helper functions
 	std::vector<double> convertQuaternionForGl(); 

@@ -1,9 +1,8 @@
-#pragma once
 #include "Motion.h"
 
-class SpinOnly : public Motion {
-public:
-	SpinOnly();
+class Wobble : public Motion {
+public: 
+	Wobble(); 
 
 	double rX();
 	double rY();

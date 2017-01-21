@@ -1,5 +1,5 @@
 #pragma once
-#include "Path.h"
+#include "Motion.h"
 
 class CircularPathWithSpin : public Motion {
 public: 

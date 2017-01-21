@@ -121,6 +121,8 @@
     <ClCompile Include="Simulate.cpp" />
     <ClCompile Include="SpinOnly.cpp" />
     <ClCompile Include="testObject.cpp" />
+    <ClCompile Include="Wobble.cpp" />
+    <ClCompile Include="Wobble.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -132,7 +134,7 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="MockIMU.h" />
     <ClInclude Include="OrientationEstimator.h" />
-    <ClInclude Include="Path.h" />
+    <ClInclude Include="Motion.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="SpinOnly.h" />
     <ClInclude Include="testObject.h" />

@@ -1,7 +1,7 @@
 #pragma once
 #include <gl/freeglut.h>
 #include "Clock.h"
-#include "Path.h"
+#include "Motion.h"
 #include "MockIMU.h"
 
 class testObject {

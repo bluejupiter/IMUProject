@@ -59,15 +59,20 @@ vector<double> OrientationEstimator::crossProduct(vector<double> u, vector<doubl
 }
 
 void OrientationEstimator::updateDCM() {
+	// Weighting from three different inputs
+	double accWeight = 0; 
+	double gyroWeight = 1; 
+	double magWeight = 0; 
+
 	// Find angular displacement according to the three sensors
 	vector<double> accAngle = accelerometerDeltaAngle(); 
 	vector<double> gyroAngle = gyroscopeDeltaAngle();
 	vector<double> magAngle = magnetDeltaAngle();
 
 	// Combine and weight
-	vector<double> angleDisplacement = { accAngle[0] / 3 + gyroAngle[0] / 3 + magAngle[0] / 3,
-										accAngle[1] / 3 + gyroAngle[1] / 3 + magAngle[1] / 3,
-										accAngle[2] / 3 + gyroAngle[2] / 3 + magAngle[2] / 3 };
+	vector<double> angleDisplacement = {accAngle[0] * accWeight + gyroAngle[0] * gyroWeight + magAngle[0] * magWeight,
+										accAngle[1] * accWeight + gyroAngle[1] * gyroWeight + magAngle[1] * magWeight,
+										accAngle[2] * accWeight + gyroAngle[2] * gyroWeight + magAngle[2] * magWeight };
 
 	//Update DCM
 	vector<double> NorthChange = crossProduct(angleDisplacement, North); 

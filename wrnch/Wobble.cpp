@@ -9,10 +9,10 @@ double Wobble::rX() { return 0; };
 double Wobble::rY() { return 0; };
 double Wobble::rZ() { return 1; };
 
-double Wobble::xAcc() { return 0; };
-double Wobble::yAcc() { return 0; };
-double Wobble::zAcc() { return -9.81; };
+double Wobble::xAcc() { return gravityX(); };
+double Wobble::yAcc() { return gravityY(); };
+double Wobble::zAcc() { return gravityZ(); };
 
 void Wobble::update() {
 	quat = change.multiply(quat);
-}
+}; 

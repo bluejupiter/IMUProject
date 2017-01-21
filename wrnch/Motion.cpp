@@ -2,6 +2,11 @@
 #include <math.h>
 #include <iostream>
 
+Motion::Motion() {
+	downGlobalFrame.set(0, 0, 0, -1);
+	clock = Clock::getInstance();
+}
+
 std::vector<double> Motion::convertQuaternionForGl() {
 	double angle = 2 * acos(quat.w) * 180 / 3.14;
 	double s = sqrt(1 - quat.w * quat.w);
@@ -37,4 +42,25 @@ double Motion::wZ() {
 	double angularVelocity = yaw / Clock::increment; 
 
 	return angularVelocity; 
+}
+
+double Motion::gravityX() {
+	Quaternion down = quat.conjugate(downGlobalFrame);
+
+	double s = sqrt(1 - down.w*down.w);
+	return down.x / s * 9.81;
+}
+
+double Motion::gravityY() {
+	Quaternion down = quat.conjugate(downGlobalFrame);
+
+	double s = sqrt(1 - down.w*down.w);
+	return down.y / s * 9.81;
+}
+
+double Motion::gravityZ() {
+	Quaternion down = quat.conjugate(downGlobalFrame);
+
+	double s = sqrt(1 - down.w*down.w);
+	return down.z / s * 9.81;
 }

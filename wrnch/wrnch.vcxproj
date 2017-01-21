@@ -116,7 +116,7 @@
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="MockIMU.cpp" />
     <ClCompile Include="OrientationEstimator.cpp" />
-    <ClCompile Include="Path.cpp" />
+    <ClCompile Include="Motion.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Simulate.cpp" />
     <ClCompile Include="SpinOnly.cpp" />

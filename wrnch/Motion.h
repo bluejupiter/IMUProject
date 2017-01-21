@@ -8,8 +8,9 @@ public:
 	Clock * clock; 
 	Quaternion quat; 
 	Quaternion change; 
+	Quaternion downGlobalFrame; //(unit vector, points straight down in global frame)
 
-	Motion() { clock = Clock::getInstance(); };
+	Motion();
 	virtual double rX() = 0;		//x coordinate in global frame
 	virtual double rY() = 0;		//y coordinate in global frame
 	virtual double rZ() = 0;		//z coordinate in global frame 
@@ -25,5 +26,8 @@ public:
 	// Helper functions
 	std::vector<double> convertQuaternionForGl(); 
 	virtual void update() = 0; 
+	double gravityX();				//Gravity's contribution to the object frame's x-axis;
+	double gravityY();				//Gravity's contribution to the object frame's x-axis;
+	double gravityZ();				//Gravity's contribution to the object frame's x-axis;
 };
 

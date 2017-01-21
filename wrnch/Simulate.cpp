@@ -107,7 +107,7 @@ std::string convert(Quaternion q) {
 // Initializes GLUT and enters the main loop.
 int main(int argc, char** argv) {
 
-	simulate(argc, argv); 
+	//simulate(argc, argv); 
 
 	/*
 	Quaternion start(1, 0, 0, 0); 
@@ -142,10 +142,10 @@ int main(int argc, char** argv) {
 	spin.update();
 	std::cout << "\nNorth in local frame is given by mx = " + std::to_string(testIMU.mX()) + "   my = " + std::to_string(testIMU.mY()) + "   mz = " + std::to_string(testIMU.mZ()) + "/n";
 
+	*/
 	
 	
-	
-	SpinOnly spin;
+	Wobble spin;
 	MockIMU testIMU(&spin);
 	OrientationEstimator oe(&testIMU); 
 	std::cout << "Start Quaternion is: " + spin.quat.toString();
@@ -160,5 +160,5 @@ int main(int argc, char** argv) {
 		std::cout << "OE Quaternion is: " + oe.getQuaternion().toString();
 	}
 	system("pause");
-	*/
+	
 }

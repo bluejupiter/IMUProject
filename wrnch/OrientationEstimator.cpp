@@ -11,14 +11,17 @@ OrientationEstimator::OrientationEstimator(MockIMU * i) : imu(i) {
 	//CREATE INITIAL DCM MATRIX DCM = {North, West, Zenith}^T
 	// Zenith is opposite of Gravity. Assume other acceleration is small compared to gravity
 	Zenith = { -1 * imu->xAcc() , -1 * imu->yAcc(), -1 * imu->zAcc() };
+	std::cout << "\nIn constructor. Zenith is [" + std::to_string(Zenith[0]) + "] [" + std::to_string(Zenith[1]) + "] [" + std::to_string(Zenith[2]) + "]";
 	normalize(Zenith); 
 
 	// North can be measured by magnetometer. Assume no interference
 	North = { imu->mX() , imu->mY() , imu->mZ() }; 
+	std::cout << "\nIn constructor. North is [" + std::to_string(North[0]) + "] [" + std::to_string(North[1]) + "] [" + std::to_string(North[2]) + "]";
 	normalize(North); 
 
 	// West is the cross product of Zenith and North
 	West = crossProduct(Zenith, North); 
+	std::cout << "\nIn constructor. West is [" + std::to_string(West[0]) + "] [" + std::to_string(West[1]) + "] [" + std::to_string(West[2]) + "]\n";
 	normalize(West); 
 
 	orthonormalizeDCM(); 
@@ -62,7 +65,7 @@ void OrientationEstimator::updateDCM() {
 	// Weighting from three different inputs
 	double accWeight = 0; 
 	double gyroWeight = 1; 
-	double magWeight = 0; 
+	double magWeight = 0;
 
 	// Find angular displacement according to the three sensors
 	vector<double> accAngle = accelerometerDeltaAngle(); 

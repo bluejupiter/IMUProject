@@ -7,7 +7,7 @@ using std::vector;
 
 OrientationEstimator::OrientationEstimator(MockIMU * i) : imu(i) {
 	timeIncrement = Clock::increment; 
-
+	clock = Clock::getInstance(); 
 	//CREATE DCM MATRIX DCM = {North, West, Zenith}^T
 	calibrate(); 
 }
@@ -207,6 +207,12 @@ void OrientationEstimator::calibrate() {
 
 	orthonormalizeDCM();
 }
+
+pair<Quaternion, double> OrientationEstimator::queryEstimatedOrientation() {
+	pair<Quaternion, double> query(getQuaternion(), clock->getTime()); 
+	return query; 
+}
+
 
 string OrientationEstimator::getNorth() {
 	return "[" + std::to_string(North[0]) + "] [" + std::to_string(North[1]) + "] [" + std::to_string(North[2]) + "]"; 

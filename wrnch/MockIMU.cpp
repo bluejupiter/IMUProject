@@ -1,7 +1,9 @@
 #include "MockIMU.h"
 #include <random>
 
-MockIMU::MockIMU(Motion * p) : path(p) {}
+MockIMU::MockIMU(Motion * p) : path(p) {
+	northGlobalFrame.set(0, 1, 0, 0); // Represent north as unit vector (in quaternion format) pointing to x
+}
 
 double MockIMU::error() {
 	double r = ((double)rand() / (RAND_MAX));	// 0 < r < 1
@@ -37,11 +39,23 @@ double MockIMU::wZ() {
 
 // STUBS - Fix when quaternion math is figured out
 double MockIMU::mX() {
-	return 0; 
+	Quaternion north = path->quat.conjugate(northGlobalFrame); 
+
+	//Get x component of north quaternion
+	double s = sqrt(1 - north.w*north.w); 
+	return north.x / s; 
 }
 double MockIMU::mY() {
-	return 0;
+	Quaternion north = path->quat.conjugate(northGlobalFrame);
+
+	//Get y component of north quaternion
+	double s = sqrt(1 - north.w*north.w);
+	return north.y / s;
 }
 double MockIMU::mZ() {
-	return 0;
+	Quaternion north = path->quat.conjugate(northGlobalFrame);
+
+	//Get z component of north quaternion
+	double s = sqrt(1 - north.w*north.w);
+	return north.z / s;
 }

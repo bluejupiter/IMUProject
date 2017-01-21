@@ -104,7 +104,7 @@ std::string convert(Quaternion q) {
 // Initializes GLUT and enters the main loop.
 int main(int argc, char** argv) {
 
-	simulate(argc, argv); 
+	//simulate(argc, argv); 
 
 	/*
 	Quaternion start(1, 0, 0, 0); 
@@ -118,15 +118,28 @@ int main(int argc, char** argv) {
 		std::cout << "Rotated vector is now: " + convert(start); 
 	}
 	system("pause");
-
+	*/
 	
 
 	SpinOnly spin; 
+	MockIMU testIMU(&spin); 
+	std::cout << "\nOriginal North in local frame is given by mx = " + std::to_string(testIMU.mX()) + "   my = " + std::to_string(testIMU.mY()) + "   mz = " + std::to_string(testIMU.mZ()) + "/n";
+	clock->tick(); 
+	spin.update(); 
 	std::cout << "Increment is " + std::to_string(Clock::increment); 
 	std::cout << "Start Quaternion is: " + spin.quat.toString();
 	std::cout << "Rotate Quaternion is: " + spin.change.toString();
 	std::cout << "\nAngular velocities are: \n\t wX = " + std::to_string(spin.wX()) + "\n\t wY = " + std::to_string(spin.wY()) + "\n\t wZ = " + std::to_string(spin.wZ()); 
+	std::cout << "\nNorth in local frame is given by mx = " + std::to_string(testIMU.mX()) + "   my = " + std::to_string(testIMU.mY()) + "   mz = " + std::to_string(testIMU.mZ()) + "/n"; 
+	
+	clock->tick();
+	spin.update();
+	std::cout << "\nNorth in local frame is given by mx = " + std::to_string(testIMU.mX()) + "   my = " + std::to_string(testIMU.mY()) + "   mz = " + std::to_string(testIMU.mZ()) + "/n";
+	clock->tick();
+	spin.update();
+	std::cout << "\nNorth in local frame is given by mx = " + std::to_string(testIMU.mX()) + "   my = " + std::to_string(testIMU.mY()) + "   mz = " + std::to_string(testIMU.mZ()) + "/n";
 
+	
 	system("pause"); 
-	*/
+	
 }

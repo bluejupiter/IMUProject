@@ -1,8 +1,10 @@
 #pragma once
 #include "Path.h"
+#include "Quaternion.h"
 
 class MockIMU {
 	Motion * path; 
+	Quaternion northGlobalFrame;
 
 public: 
 	MockIMU(Motion * p); 

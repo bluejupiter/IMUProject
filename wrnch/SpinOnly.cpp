@@ -18,6 +18,6 @@ double SpinOnly::yAcc() { return 0; };
 double SpinOnly::zAcc() { return -9.81; };
 
 void SpinOnly::update() {
-	quat = change * quat; 
+	quat = change.multiply(quat); 
 }
 

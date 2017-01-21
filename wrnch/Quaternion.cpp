@@ -12,7 +12,7 @@ void Quaternion::normalize() {
 	}
 }
 
-Quaternion & Quaternion::operator*(const Quaternion & q2)
+Quaternion & Quaternion::multiply(const Quaternion & q2)
 {
 	double wNew = w*q2.w - x*q2.x - y*q2.y - z*q2.z;
 	double xNew = w*q2.x + x*q2.w + y*q2.z - z*q2.y; 
@@ -30,3 +30,11 @@ std::string Quaternion::toString() {
 	std::string output = "(" + std::to_string(w) + ", " + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")\n"; 
 	return output; 
 }
+
+Quaternion& Quaternion::conjugate(Quaternion& vector) {
+	Quaternion inverse(w, -1 * x, -1 * y, -1 * z); 
+	Quaternion result = vector.multiply(inverse);
+	result = this->multiply(result); 
+	return result; 
+}
+

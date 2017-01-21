@@ -27,7 +27,7 @@ double MockIMU::yAcc() {
 }
 
 double MockIMU::zAcc() {
-	return path->yAcc()*error(); 
+	return path->zAcc()*error(); 
 }
 
 double MockIMU::wX() {

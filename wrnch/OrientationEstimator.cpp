@@ -124,30 +124,30 @@ Quaternion OrientationEstimator::getQuaternion() {
 	if (DCMTrace > 0) {
 		double s = 0.5 / sqrt(DCMTrace + 1.0);
 		q.w = 0.25 / s;
-		q.x = s * (Zenith[1] - West[2]);
-		q.y = s * (North[2] - Zenith[0]);
-		q.z = s * (West[0] - North[1]);
+		q.x = s * - (Zenith[1] - West[2]);
+		q.y = s * - (North[2] - Zenith[0]);
+		q.z = s * - (West[0] - North[1]);
 	}
 	else {
 		if (North[0] > West[1] && North[0] > Zenith[2]) {
 			double s = 2.0 * sqrt(1.0 + North[0] - West[1] - Zenith[2]); 
-			q.w = (Zenith[1] - West[2]) / s; 
+			q.w = - (Zenith[1] - West[2]) / s; 
 			q.x = 0.25 * s; 
-			q.y = (North[1] + West[0]) / s; 
-			q.z = (North[2] + Zenith[0]) / s; 
+			q.y = - (North[1] + West[0]) / s; 
+			q.z = - (North[2] + Zenith[0]) / s; 
 		}
 		else if (West[1] > Zenith[2]) {
 			double s = 2.0 * sqrt(1.0 + West[1] - North[0] - Zenith[2]); 
-			q.w = (North[2] - Zenith[0]) / s; 
-			q.x = (North[1] + West[0]) / s; 
+			q.w = - (North[2] - Zenith[0]) / s; 
+			q.x = - (North[1] + West[0]) / s; 
 			q.y = 0.25 * s; 
-			q.z = (West[2] + Zenith[1]) / s; 
+			q.z = - (West[2] + Zenith[1]) / s; 
 		}
 		else {
 			double s = 2.0 * sqrt(1.0 + Zenith[2] - North[0] - West[1]); 
-			q.w = (West[0] - North[1]) / s;
-			q.x = (North[2] + Zenith[0]) / s; 
-			q.y = (West[2] + Zenith[1]) / s; 
+			q.w = - (West[0] - North[1]) / s;
+			q.x = - (North[2] + Zenith[0]) / s; 
+			q.y = - (West[2] + Zenith[1]) / s; 
 			q.z = 0.25 * s; 
 		}
 	}

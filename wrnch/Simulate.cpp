@@ -141,19 +141,21 @@ int main(int argc, char** argv) {
 	std::cout << "\nNorth in local frame is given by mx = " + std::to_string(testIMU.mX()) + "   my = " + std::to_string(testIMU.mY()) + "   mz = " + std::to_string(testIMU.mZ()) + "/n";
 
 	
-	system("pause"); 
+	
 	*/
 	SpinOnly spin;
 	MockIMU testIMU(&spin);
 	OrientationEstimator oe(&testIMU); 
 	std::cout << "Start Quaternion is: " + spin.quat.toString();
-	std::cout << "\nStart OE Quaternion is: " + oe.getQuaternion().toString() + "\n";
+	std::cout << "Start OE Quaternion is: " + oe.getQuaternion().toString() + "\n";
+	std::cout << "Initial DCM is: \n" + oe.getNorth() + "\n" + oe.getWest() + "\n" + oe.getZenith() + "\n"; 
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 50; i++) {
 		clock->tick(); 
 		spin.update(); 
 		oe.updateDCM(); 
 		std::cout << "\nActual Quaternion is: " + spin.quat.toString();
-		std::cout << "\nOE Quaternion is: " + oe.getQuaternion().toString();
+		std::cout << "OE Quaternion is: " + oe.getQuaternion().toString();
 	}
+	system("pause");
 }

@@ -2,7 +2,9 @@
 #include "MockIMU.h";
 #include "Quaternion.h"
 #include <vector>
+#include <string>
 using std::vector;
+using std::string;
 
 class OrientationEstimator {
 	MockIMU * imu;
@@ -21,4 +23,9 @@ public:
 	vector<double> accelerometerDeltaAngle();
 	vector<double> gyroscopeDeltaAngle();
 	vector<double> magnetDeltaAngle();
+
+	//For debugging
+	string getNorth(); 
+	string getWest(); 
+	string getZenith(); 
 };

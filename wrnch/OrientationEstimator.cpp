@@ -22,7 +22,6 @@ OrientationEstimator::OrientationEstimator(MockIMU * i) : imu(i) {
 	normalize(West); 
 
 	orthonormalizeDCM(); 
-	
 }
 
 void OrientationEstimator::normalize(vector<double> & vec) {
@@ -149,4 +148,16 @@ Quaternion OrientationEstimator::getQuaternion() {
 	}
 
 	return q; 
+}
+
+string OrientationEstimator::getNorth() {
+	return "[" + std::to_string(North[0]) + "] [" + std::to_string(North[1]) + "] [" + std::to_string(North[2]) + "]"; 
+}
+
+string OrientationEstimator::getWest() {
+	return "[" + std::to_string(West[0]) + "] [" + std::to_string(West[1]) + "] [" + std::to_string(West[2]) + "]";
+}
+
+string OrientationEstimator::getZenith() {
+	return "[" + std::to_string(Zenith[0]) + "] [" + std::to_string(Zenith[1]) + "] [" + std::to_string(Zenith[2]) + "]";
 }

@@ -8,23 +8,8 @@ using std::vector;
 OrientationEstimator::OrientationEstimator(MockIMU * i) : imu(i) {
 	timeIncrement = Clock::increment; 
 
-	//CREATE INITIAL DCM MATRIX DCM = {North, West, Zenith}^T
-	// Zenith is opposite of Gravity. Assume other acceleration is small compared to gravity
-	Zenith = { -1 * imu->xAcc() , -1 * imu->yAcc(), -1 * imu->zAcc() };
-	std::cout << "\nIn constructor. Zenith is [" + std::to_string(Zenith[0]) + "] [" + std::to_string(Zenith[1]) + "] [" + std::to_string(Zenith[2]) + "]";
-	normalize(Zenith); 
-
-	// North can be measured by magnetometer. Assume no interference
-	North = { imu->mX() , imu->mY() , imu->mZ() }; 
-	std::cout << "\nIn constructor. North is [" + std::to_string(North[0]) + "] [" + std::to_string(North[1]) + "] [" + std::to_string(North[2]) + "]";
-	normalize(North); 
-
-	// West is the cross product of Zenith and North
-	West = crossProduct(Zenith, North); 
-	std::cout << "\nIn constructor. West is [" + std::to_string(West[0]) + "] [" + std::to_string(West[1]) + "] [" + std::to_string(West[2]) + "]\n";
-	normalize(West); 
-
-	orthonormalizeDCM(); 
+	//CREATE DCM MATRIX DCM = {North, West, Zenith}^T
+	calibrate(); 
 }
 
 void OrientationEstimator::normalize(vector<double> & vec) {
@@ -67,15 +52,21 @@ void OrientationEstimator::updateDCM() {
 	double gyroWeight = 1; 
 	double magWeight = 0;
 
-	// Find angular displacement according to the three sensors
-	vector<double> accAngle = accelerometerDeltaAngle(); 
-	vector<double> gyroAngle = gyroscopeDeltaAngle();
-	vector<double> magAngle = magnetDeltaAngle();
+	vector<double> angleDisplacement; 
 
-	// Combine and weight
-	vector<double> angleDisplacement = {accAngle[0] * accWeight + gyroAngle[0] * gyroWeight + magAngle[0] * magWeight,
-										accAngle[1] * accWeight + gyroAngle[1] * gyroWeight + magAngle[1] * magWeight,
-										accAngle[2] * accWeight + gyroAngle[2] * gyroWeight + magAngle[2] * magWeight };
+	if (gyroWeight != 1) {
+		// Find angular displacement according to the three sensors
+		vector<double> accAngle = accelerometerDeltaAngle();
+		vector<double> gyroAngle = gyroscopeDeltaAngle();
+		vector<double> magAngle = magnetDeltaAngle();
+
+		// Combine and weight
+		angleDisplacement = {	accAngle[0] * accWeight + gyroAngle[0] * gyroWeight + magAngle[0] * magWeight,
+								accAngle[1] * accWeight + gyroAngle[1] * gyroWeight + magAngle[1] * magWeight,
+								accAngle[2] * accWeight + gyroAngle[2] * gyroWeight + magAngle[2] * magWeight };
+	}
+	else
+		angleDisplacement = gyroscopeDeltaAngle();
 
 	//Update DCM
 	vector<double> NorthChange = crossProduct(angleDisplacement, North); 
@@ -156,6 +147,34 @@ Quaternion OrientationEstimator::getQuaternion() {
 	}
 
 	return q; 
+}
+
+double OrientationEstimator::accelerometerMagnitude() {
+	double x = imu->xAcc(); 
+	double y = imu->yAcc(); 
+	double z = imu->zAcc(); 
+	return sqrt(x*x + y*y + z*z); 
+}
+
+
+// std::cout << "\nIn constructor. Zenith is [" + std::to_string(Zenith[0]) + "] [" + std::to_string(Zenith[1]) + "] [" + std::to_string(Zenith[2]) + "]";
+void OrientationEstimator::calibrate() {
+	//CREATE DCM MATRIX DCM = {North, West, Zenith}^T
+	// Zenith is opposite of Gravity. Assume other acceleration is small compared to gravity
+	Zenith = { -1 * imu->xAcc() , -1 * imu->yAcc(), -1 * imu->zAcc() };
+	normalize(Zenith);
+
+	// West is the cross product of Zenith and Magnetic North
+	// Magnetic North can be measured by magnetometer. Assume no interference
+	North = { imu->mX() , imu->mY() , imu->mZ() };
+	West = crossProduct(Zenith, North);
+	normalize(West);
+
+	// Correct for magnetic tilt of Earth's field by taking the cross product of West and Zenith
+	North = crossProduct(West, Zenith); 
+	normalize(North); 
+
+	orthonormalizeDCM();
 }
 
 string OrientationEstimator::getNorth() {

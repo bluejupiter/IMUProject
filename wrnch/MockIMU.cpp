@@ -6,16 +6,16 @@ MockIMU::MockIMU(Motion * p) : path(p) {
 }
 
 double MockIMU::error() {
-	/*
+	
 	double r = ((double)rand() / (RAND_MAX));	// 0 < r < 1
 	r *= 2;										// 0 < r < 2
 	r--;										// -1 < r < 1
 
 	// Return 1% error
 	return 1.0 + 0.01*r;
-	*/
+	
 
-	return 1.0; // Start with no error
+	//return 1.0; // Start with no error
 }
 
 double MockIMU::xAcc() {

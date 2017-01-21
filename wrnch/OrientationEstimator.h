@@ -23,6 +23,8 @@ public:
 	vector<double> accelerometerDeltaAngle();
 	vector<double> gyroscopeDeltaAngle();
 	vector<double> magnetDeltaAngle();
+	double accelerometerMagnitude(); 
+	void calibrate(); 
 
 	//For debugging
 	string getNorth(); 

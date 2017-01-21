@@ -19,5 +19,5 @@ double SpinOnly::zAcc() { return -9.81; };
 
 void SpinOnly::update() {
 	quat = change.multiply(quat); 
-}
+};
 

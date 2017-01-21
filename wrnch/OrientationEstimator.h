@@ -1,5 +1,5 @@
 #pragma once
-#include "MockIMU.h";
+#include "MockIMU.h"
 #include "Quaternion.h"
 #include <vector>
 #include <string>

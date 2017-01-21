@@ -1,5 +1,5 @@
 #pragma once
-#include "Clock.h";
+#include "Clock.h"
 #include "Quaternion.h"
 #include <vector>
 

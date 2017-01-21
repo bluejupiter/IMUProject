@@ -1,3 +1,4 @@
+#pragma once
 #include "Motion.h"
 
 class Wobble : public Motion {

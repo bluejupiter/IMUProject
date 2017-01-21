@@ -8,6 +8,7 @@
 #include "SpinOnly.h"
 #include <iostream>
 #include "OrientationEstimator.h"
+#include "Wobble.h"
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
@@ -21,7 +22,8 @@ Camera camera;
 Clock * clock = Clock::getInstance(); 
 
 //Add path to object and corresponding imu
-SpinOnly path; 
+//SpinOnly path; 
+Wobble path; 
 MockIMU imuX(&path); 
 testObject test(0.5, 8, 8, &path);
 
@@ -105,7 +107,7 @@ std::string convert(Quaternion q) {
 // Initializes GLUT and enters the main loop.
 int main(int argc, char** argv) {
 
-	//simulate(argc, argv); 
+	simulate(argc, argv); 
 
 	/*
 	Quaternion start(1, 0, 0, 0); 
@@ -142,7 +144,7 @@ int main(int argc, char** argv) {
 
 	
 	
-	*/
+	
 	SpinOnly spin;
 	MockIMU testIMU(&spin);
 	OrientationEstimator oe(&testIMU); 
@@ -158,4 +160,5 @@ int main(int argc, char** argv) {
 		std::cout << "OE Quaternion is: " + oe.getQuaternion().toString();
 	}
 	system("pause");
+	*/
 }

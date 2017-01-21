@@ -114,6 +114,7 @@
     <ClCompile Include="Checkerboard.cpp" />
     <ClCompile Include="CircularPathWithSpin.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="Mock3DSensor.cpp" />
     <ClCompile Include="MockIMU.cpp" />
     <ClCompile Include="OrientationEstimator.cpp" />
     <ClCompile Include="Motion.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="Checkerboard.h" />
     <ClInclude Include="CircularPathWithSpin.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="Mock3DSensor.h" />
     <ClInclude Include="MockIMU.h" />
     <ClInclude Include="OrientationEstimator.h" />
     <ClInclude Include="Motion.h" />

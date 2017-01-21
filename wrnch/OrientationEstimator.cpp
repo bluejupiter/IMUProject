@@ -48,16 +48,31 @@ vector<double> OrientationEstimator::crossProduct(vector<double> u, vector<doubl
 
 void OrientationEstimator::updateDCM() {
 	// Weighting from three different inputs
-	double accWeight = 0; 
-	double gyroWeight = 1; 
-	double magWeight = 0;
+	double accWeight; 
+	double gyroWeight;
+	double magWeight;
+
+	if (abs(accelerometerMagnitude() - 9.81) < 0.01) {
+		accWeight = 0.5; 
+		magWeight = 0.5; 
+
+		gyroWeight = 0; 
+	}
+	else {
+		gyroWeight = 1.0; 
+
+		accWeight = 0.0; 
+		magWeight = 0.0; 
+	}
 
 	vector<double> angleDisplacement; 
 
 	if (gyroWeight != 1) {
+		//std::cout << "\t DCM: \n\t\t" + getNorth() + "\n\t\t" + getWest() + "\n\t\t" + getZenith() + "\n"; 
+
 		// Find angular displacement according to the three sensors
-		vector<double> accAngle = accelerometerDeltaAngle();
 		vector<double> gyroAngle = gyroscopeDeltaAngle();
+		vector<double> accAngle = accelerometerDeltaAngle();
 		vector<double> magAngle = magnetDeltaAngle();
 
 		// Combine and weight
@@ -85,11 +100,14 @@ vector<double> OrientationEstimator::accelerometerDeltaAngle() {
 	vector<double> newZenith = { -1 * imu->xAcc() , -1 * imu->yAcc(), -1 * imu->zAcc() };
 	normalize(newZenith); 
 
-	vector<double> diff = { Zenith[0] - newZenith[0],
-							Zenith[1] - newZenith[1],
-							Zenith[2] - newZenith[2]};
+	vector<double> diff = { newZenith[0] - Zenith[0],
+							newZenith[1] - Zenith[1],
+							newZenith[2] - Zenith[2]};
 
 	vector<double> deltaAngle = crossProduct(Zenith, diff); 
+
+	//std::cout << "\tAccelerometer derived angles: " + std::to_string(deltaAngle[0]) + ", " + std::to_string(deltaAngle[1]) + ", " + std::to_string(deltaAngle[2]) + "\n"; 
+	//std::cout << "\t\tnewZenith: " + std::to_string(newZenith[0]) + ", " + std::to_string(newZenith[1]) + ", " + std::to_string(newZenith[2]) + "\n";
 	return deltaAngle; 
 }
 
@@ -97,18 +115,31 @@ vector<double> OrientationEstimator::gyroscopeDeltaAngle() {
 	vector<double> deltaAngle = { timeIncrement * imu->wX(),
 									timeIncrement * imu->wY(),
 									timeIncrement * imu->wZ() }; 
+
+	//std::cout << "\tGyroscope derived angles: " + std::to_string(deltaAngle[0]) + ", " + std::to_string(deltaAngle[1]) + ", " + std::to_string(deltaAngle[2]) + "\n";
 	return deltaAngle; 
 }
 
 vector<double> OrientationEstimator::magnetDeltaAngle() {
+
+	// Determine North (corrected for magnetic dip and orthogonalized) by:
+	//		1) Finding Zenith, magnetic North and taking thier cross product to find true, orthogonal west
+	//		2) Taking the cross product of Zenith and West to find orthogonal North
+	vector<double> currentZenith = { -1 * imu->xAcc() , -1 * imu->yAcc(), -1 * imu->zAcc() };
 	vector<double> newNorth = { imu->mX() , imu->mY() , imu->mZ() };
+	vector<double> newWest = crossProduct(currentZenith, newNorth);
+	newNorth = crossProduct(newWest, currentZenith);
 	normalize(newNorth);
 
-	vector<double> diff = { North[0] - newNorth[0],
-							North[1] - newNorth[1],
-							North[2] - newNorth[2] }; 
+	vector<double> diff = { newNorth[0] - North[0],
+							newNorth[1] - North[1],
+							newNorth[2] - North[2] };
 	vector<double> deltaAngle = crossProduct(North, diff); 
+
+	//std::cout << "\tCompass derived angles: " + std::to_string(deltaAngle[0]) + ", " + std::to_string(deltaAngle[1]) + ", " + std::to_string(deltaAngle[2]) + "\n";
+	//std::cout << "\t\tNew North: " + std::to_string(newNorth[0]) + ", " + std::to_string(newNorth[1]) + ", " + std::to_string(newNorth[2]) + "\n";
 	return deltaAngle; 
+
 }
 
 Quaternion OrientationEstimator::getQuaternion() {
@@ -155,7 +186,7 @@ double OrientationEstimator::accelerometerMagnitude() {
 	double z = imu->zAcc(); 
 	return sqrt(x*x + y*y + z*z); 
 }
-
+ 
 
 // std::cout << "\nIn constructor. Zenith is [" + std::to_string(Zenith[0]) + "] [" + std::to_string(Zenith[1]) + "] [" + std::to_string(Zenith[2]) + "]";
 void OrientationEstimator::calibrate() {

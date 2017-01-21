@@ -7,6 +7,7 @@
 #include "Clock.h"
 #include "SpinOnly.h"
 #include <iostream>
+#include "OrientationEstimator.h"
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
@@ -118,7 +119,7 @@ int main(int argc, char** argv) {
 		std::cout << "Rotated vector is now: " + convert(start); 
 	}
 	system("pause");
-	*/
+	
 	
 
 	SpinOnly spin; 
@@ -141,5 +142,18 @@ int main(int argc, char** argv) {
 
 	
 	system("pause"); 
-	
+	*/
+	SpinOnly spin;
+	MockIMU testIMU(&spin);
+	OrientationEstimator oe(&testIMU); 
+	std::cout << "Start Quaternion is: " + spin.quat.toString();
+	std::cout << "\nStart OE Quaternion is: " + oe.getQuaternion().toString() + "\n";
+
+	for (int i = 0; i < 5; i++) {
+		clock->tick(); 
+		spin.update(); 
+		oe.updateDCM(); 
+		std::cout << "\nActual Quaternion is: " + spin.quat.toString();
+		std::cout << "\nOE Quaternion is: " + oe.getQuaternion().toString();
+	}
 }

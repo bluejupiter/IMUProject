@@ -15,7 +15,7 @@ double MockIMU::error() {
 	return 1.0 + 0.01*r;
 	*/
 
-	return 1.0 // Start with no error
+	return 1.0; // Start with no error
 }
 
 double MockIMU::xAcc() {

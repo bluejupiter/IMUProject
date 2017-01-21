@@ -47,19 +47,19 @@ double MockIMU::mX() {
 
 	//Get x component of north quaternion
 	double s = sqrt(1 - north.w*north.w); 
-	return north.x / s; 
+	return north.x / s * error(); 
 }
 double MockIMU::mY() {
 	Quaternion north = path->quat.conjugate(northGlobalFrame);
 
 	//Get y component of north quaternion
 	double s = sqrt(1 - north.w*north.w);
-	return north.y / s;
+	return north.y / s * error();
 }
 double MockIMU::mZ() {
 	Quaternion north = path->quat.conjugate(northGlobalFrame);
 
 	//Get z component of north quaternion
 	double s = sqrt(1 - north.w*north.w);
-	return north.z / s;
+	return north.z / s * error();
 }

@@ -8,7 +8,7 @@ void Quaternion::normalize() {
 		w /= magnitude; 
 		x /= magnitude; 
 		y /= magnitude; 
-		z /= magnitude; 
+		z /= magnitude;  
 	}
 }
 
@@ -31,10 +31,16 @@ std::string Quaternion::toString() {
 	return output; 
 }
 
-Quaternion& Quaternion::conjugate(Quaternion& vector) {
+Quaternion& Quaternion::intoBodyFrame(Quaternion& vector) {
 	Quaternion inverse(w, -1 * x, -1 * y, -1 * z); 
 	Quaternion result = vector.multiply(inverse);
 	result = this->multiply(result); 
 	return result; 
 }
 
+Quaternion& Quaternion::intoGlobalFrame(Quaternion& vector) {
+	Quaternion inverse(w, -1 * x, -1 * y, -1 * z);
+	Quaternion result = vector.multiply(*this);
+	result = inverse.multiply(result);
+	return result;
+}

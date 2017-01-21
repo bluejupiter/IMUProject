@@ -3,6 +3,7 @@
 
 Mock3DSensor::Mock3DSensor(Motion * x, Motion * c) : xMotion(x), cMotion(c) {
 	clock = Clock::getInstance(); 
+	maxError = 0.05; // Error of 5 cm 
 }; 
 
 Quaternion Mock3DSensor::getApparentPositionOfX() {
@@ -16,7 +17,7 @@ Quaternion Mock3DSensor::getApparentPositionOfX() {
 		xMotion->rZ() - cMotion->rZ() + error());
 
 	// Rotate global position vector into Camera's reference frame
-	Quaternion xLocInCFrame = cMotion->quat.conjugate(xLocation);
+	Quaternion xLocInCFrame = cMotion->quat.intoBodyFrame(xLocation);
 
 	// Return X's position in Camera's reference frame
 	return xLocInCFrame; 
@@ -25,7 +26,7 @@ Quaternion Mock3DSensor::getApparentPositionOfX() {
 pair<Quaternion, double> Mock3DSensor::query3DSensor() {
 	// Return data sporadically
 	double r = ((double)rand() / (RAND_MAX));	// 0 < r < 1
-	if (r < 0.1) {
+	if (r < 0.2) {
 		pair<Quaternion, double> noResult(getApparentPositionOfX(), clock->getTime());
 	}
 	else {
@@ -40,7 +41,7 @@ double Mock3DSensor::error() {
 	r *= 2;										// 0 < r < 2
 	r--;										// -1 < r < 1
 
-	double error = r* 0.05;						// Give sensor error of 5 cm
+	double error = r* maxError;	
 	return error; 
 }
 

@@ -15,6 +15,7 @@ public:
 	Quaternion& multiply(const Quaternion&); 
 	void set(double w, double x, double y, double z); 
 	std::string toString(); 
-	Quaternion& conjugate(Quaternion&); 
+	Quaternion& intoBodyFrame(Quaternion&); 
+	Quaternion& intoGlobalFrame(Quaternion&);
 
 };

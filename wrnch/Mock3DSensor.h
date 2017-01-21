@@ -7,6 +7,7 @@ using std::pair;
 
 class Mock3DSensor {
 public: 
+	double maxError; 
 	Clock * clock; 
 	Motion * xMotion;
 	Motion * cMotion; 

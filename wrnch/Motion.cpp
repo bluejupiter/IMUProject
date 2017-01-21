@@ -45,21 +45,21 @@ double Motion::wZ() {
 }
 
 double Motion::gravityX() {
-	Quaternion down = quat.conjugate(downGlobalFrame);
+	Quaternion down = quat.intoBodyFrame(downGlobalFrame);
 
 	double s = sqrt(1 - down.w*down.w);
 	return down.x / s * 9.81;
 }
 
 double Motion::gravityY() {
-	Quaternion down = quat.conjugate(downGlobalFrame);
+	Quaternion down = quat.intoBodyFrame(downGlobalFrame);
 
 	double s = sqrt(1 - down.w*down.w);
 	return down.y / s * 9.81;
 }
 
 double Motion::gravityZ() {
-	Quaternion down = quat.conjugate(downGlobalFrame);
+	Quaternion down = quat.intoBodyFrame(downGlobalFrame);
 
 	double s = sqrt(1 - down.w*down.w);
 	return down.z / s * 9.81;

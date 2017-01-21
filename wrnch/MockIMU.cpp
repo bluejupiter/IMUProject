@@ -43,21 +43,21 @@ double MockIMU::wZ() {
 
 // STUBS - Fix when quaternion math is figured out
 double MockIMU::mX() {
-	Quaternion north = path->quat.conjugate(northGlobalFrame); 
+	Quaternion north = path->quat.intoBodyFrame(northGlobalFrame); 
 
 	//Get x component of north quaternion
 	double s = sqrt(1 - north.w*north.w); 
 	return north.x / s * error(); 
 }
 double MockIMU::mY() {
-	Quaternion north = path->quat.conjugate(northGlobalFrame);
+	Quaternion north = path->quat.intoBodyFrame(northGlobalFrame);
 
 	//Get y component of north quaternion
 	double s = sqrt(1 - north.w*north.w);
 	return north.y / s * error();
 }
 double MockIMU::mZ() {
-	Quaternion north = path->quat.conjugate(northGlobalFrame);
+	Quaternion north = path->quat.intoBodyFrame(northGlobalFrame);
 
 	//Get z component of north quaternion
 	double s = sqrt(1 - north.w*north.w);

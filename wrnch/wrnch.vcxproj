@@ -125,6 +125,7 @@
     <ClCompile Include="testObject.cpp" />
     <ClCompile Include="Wobble.cpp" />
     <ClCompile Include="Wobble.h" />
+    <ClCompile Include="WobbleAndMove.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="SpinOnly.h" />
     <ClInclude Include="testObject.h" />
+    <ClInclude Include="WobbleAndMove.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

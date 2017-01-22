@@ -33,7 +33,6 @@ public:
 
 	PositionEstimator(OrientationEstimator&, OrientationEstimator&, Mock3DSensor&); 
 	void update(); 
-
 	void gatherLagData(); 
 	void incorporate3Dposition(); 
 	void estimatePosition(); 

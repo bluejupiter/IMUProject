@@ -216,6 +216,7 @@ pair<Quaternion, double> OrientationEstimator::queryEstimatedOrientation() {
 pair<Quaternion, double> OrientationEstimator::queryIMUAcc() {
 	Quaternion qAcc (0, imu->xAcc(), imu->yAcc(), imu->zAcc()); 
 	pair<Quaternion, double> query(qAcc, clock->getTime()); 
+	return query; 
 }
 
 

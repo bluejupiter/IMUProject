@@ -73,18 +73,18 @@ void PositionEstimator::incorporate3Dposition() {
 }
 
 void PositionEstimator::estimatePosition() {
-	pair<Quaternion, double> xOrientation = xQueueOE.front; 
-	pair<Quaternion, double> cOrientation = cQueueOE.front;
+	pair<Quaternion, double> xOrientation = xQueueOE.front(); 
+	pair<Quaternion, double> cOrientation = cQueueOE.front();
 	if (clock->getTime() - xOrientation.second <= lag) {
 		xQueueOE.pop(); 
 		cQueueOE.pop(); 
 
-		pair<Quaternion, double> xAccData = xQueueAcc.front; xQueueAcc.pop();
+		pair<Quaternion, double> xAccData = xQueueAcc.front(); xQueueAcc.pop();
 		Quaternion xLocalFrameAcc = xAccData.first;
 		Quaternion xGlobalFrameAcc = xOrientation.first.intoGlobalFrame(xLocalFrameAcc);
 		xGlobalFrameAcc.z += 9.81;  //Cancel gravity
 
-		pair<Quaternion, double> cAccData = cQueueAcc.front; cQueueAcc.pop();
+		pair<Quaternion, double> cAccData = cQueueAcc.front(); cQueueAcc.pop();
 		Quaternion cLocalFrameAcc = cAccData.first;
 		Quaternion cGlobalFrameAcc = cOrientation.first.intoGlobalFrame(cLocalFrameAcc);
 		cGlobalFrameAcc.z += 9.81; //Cancel gravity

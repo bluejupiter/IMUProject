@@ -14,5 +14,9 @@ public:
 	double yAcc();
 	double zAcc();
 
+	double rXatTime(double); 
+	double rYatTime(double); 
+	double rZatTime(double); 
+
 	void update();
 };

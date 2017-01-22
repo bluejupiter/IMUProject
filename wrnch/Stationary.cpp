@@ -13,6 +13,18 @@ double Stationary::xAcc() { return gravityX(); };
 double Stationary::yAcc() { return gravityY(); };
 double Stationary::zAcc() { return gravityZ(); };
 
+double Stationary::rXatTime(double time) {
+	return xOffset;
+}
+
+double Stationary::rYatTime(double time) {
+	return yOffset; 
+}
+
+double Stationary::rZatTime(double time) {
+	return zOffset;
+}
+
 void Stationary::update() {
 	// do nothing
 };

@@ -63,3 +63,27 @@ void WobbleAndMove::update() {
 
 	quat = change.multiply(quat);
 };
+
+double WobbleAndMove::rXatTime(double time) {
+	double t = time; 
+	double x;
+	if (t < 1)
+		x = cos(t)* (3 * t * t - 2 * t * t * t);
+	else
+		x = cos(t);
+
+	return x + xOffset;
+}
+double WobbleAndMove::rYatTime(double time) {
+	double t = time;
+	double y;
+	if (t < 1)
+		y = sin(t) * (3 * t * t - 2 * t * t * t);
+	else
+		y = sin(t);
+
+	return y + yOffset;
+}
+double WobbleAndMove::rZatTime(double time) {
+	return zOffset;
+}

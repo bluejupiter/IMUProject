@@ -31,8 +31,8 @@ public:
 	double gravityY();				//Gravity's contribution to the object frame's x-axis;
 	double gravityZ();				//Gravity's contribution to the object frame's x-axis;
 	
-	virtual double rXatTime() { return 0; };
-	virtual double rYatTime() { return 0; };
-	virtual double rZatTime() { return 0; };
+	virtual double rXatTime(double) { return xOffset; };
+	virtual double rYatTime(double) { return yOffset; };
+	virtual double rZatTime(double) { return zOffset; };
 };
 

@@ -13,6 +13,7 @@
 #include "Stationary.h"
 #include "Mock3DSensor.h"
 #include "PositionEstimator.h"
+#include "Predict.h"
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
@@ -26,7 +27,7 @@ Camera camera;
 Clock * clock = Clock::getInstance(); 
 
 //Add path to object and corresponding imu
-//SpinOnly path; 
+
 WobbleAndMove xpath(1, 0, 1); 
 MockIMU imuX(&xpath); 
 testObject test(0.5, 8, 8, &xpath);
@@ -40,6 +41,7 @@ OrientationEstimator cOE(&imuC);
 Mock3DSensor threeD(&xpath, &cpath); 
 PositionEstimator PE(xOE, cOE, threeD); 
 
+Predict predictionVisual(0.2, 8, 8, PE, cpath);
 
 
 // Application-specific initialization: Set up global lighting parameters
@@ -67,6 +69,10 @@ void display() {
 	checkerboard.draw();
 	test.update(); 
 	testC.update(); 
+	cOE.updateDCM(); 
+	xOE.updateDCM(); 
+	PE.update();
+	predictionVisual.update();
 	glFlush();
 	glutSwapBuffers();
 }
@@ -116,7 +122,7 @@ void simulate(int argc, char** argv) {
 // Initializes GLUT and enters the main loop.
 int main(int argc, char** argv) {
 
-	simulate(argc, argv); 
+	//simulate(argc, argv); 
 
 	/*
 	Quaternion start(1, 0, 0, 0); 
@@ -151,24 +157,57 @@ int main(int argc, char** argv) {
 	spin.update();
 	std::cout << "\nNorth in local frame is given by mx = " + std::to_string(testIMU.mX()) + "   my = " + std::to_string(testIMU.mY()) + "   mz = " + std::to_string(testIMU.mZ()) + "/n";
 
-	
-	
-	
-	WobbleAndMove spin;
-	MockIMU testIMU(&spin);
-	OrientationEstimator oe(&testIMU); 
-	std::cout << "Start Quaternion is: " + spin.quat.toString();
-	std::cout << "Start OE Quaternion is: " + oe.getQuaternion().toString() + "\n";
-	std::cout << "Initial DCM is: \n" + oe.getNorth() + "\n" + oe.getWest() + "\n" + oe.getZenith() + "\n"; 
+	*/
+	WobbleAndMove xTest(1, 0, 1);
+	MockIMU imuXTest(&xTest);
+	OrientationEstimator xOETest(&imuXTest);
+
+	Stationary cTest(-2, 0, 1);
+	MockIMU imuCTest(&cTest);
+	OrientationEstimator cOETest(&imuCTest);
+
+	Mock3DSensor cam(&xTest, &cTest);
+	PositionEstimator PETest(xOETest, cOETest, cam);
 
 	for (int i = 0; i < 50; i++) {
 		clock->tick(); 
-		spin.update(); 
-		oe.updateDCM(); 
-		std::cout << "\nActual Quaternion is: " + spin.quat.toString();
-		std::cout << "OE Quaternion is: " + oe.getQuaternion().toString();
+		xTest.update(); 
+		cTest.update();
+		cOETest.updateDCM(); 
+		xOETest.updateDCM(); 
+		PETest.update(); 
+
+		std::cout << "X Quaternion is: " + xTest.quat.toString();
+		std::cout << "X OE Quaternion is: " + xOETest.getQuaternion().toString() + "\n";
+
+		std::cout << "C Quaternion is: " + cTest.quat.toString();
+		std::cout << "C OE Quaternion is: " + cOETest.getQuaternion().toString() + "\n\n\n";
+		/*
+		if (!PETest.estimatedPositionGlobalFrame.empty()) {
+			pair<Quaternion, double> XrelativeToC = PETest.estimatedPositionGlobalFrame.front(); PETest.estimatedPositionGlobalFrame.pop(); 
+			double xP = XrelativeToC.first.x - cTest.rXatTime(XrelativeToC.second);
+			double yP = XrelativeToC.first.y - cTest.rYatTime(XrelativeToC.second);
+			double zP = XrelativeToC.first.z - cTest.rZatTime(XrelativeToC.second);
+			std::cout << "X position according to X at time " + std::to_string(XrelativeToC.second)
+				+ "sec is [" + std::to_string(xTest.rXatTime(XrelativeToC.second)) + "][" + std::to_string(xTest.rYatTime(XrelativeToC.second))
+				+ "][" + std::to_string(xTest.rZatTime(XrelativeToC.second)) + "]\n"; 
+			std::cout << "X position according to PE at time " + std::to_string(XrelativeToC.second)
+				+ "sec is [" + std::to_string(xP) + "][" + std::to_string(yP) + "][" + std::to_string(zP) + "]\n\n"; 
+		}
+		*/
 	}
+
+
+	Quaternion vec(0, 5, 6, 7); 
+	Quaternion quat(cos(0.5), 0, 0, sin(0.5)); 
+	Quaternion mod = quat.intoBodyFrame(vec); 
+	mod = quat.intoGlobalFrame(vec); 
+	std::cout << "Vec is : " + std::to_string(vec.w) + " " + std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z) + "\n";
+
 	system("pause");
-	*/
+	
 	
 }
+
+//std::cout << "Start Quaternion is: " + spin.quat.toString();
+//std::cout << "Start OE Quaternion is: " + oe.getQuaternion().toString() + "\n";

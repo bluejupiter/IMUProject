@@ -53,10 +53,10 @@ void OrientationEstimator::updateDCM() {
 	double magWeight;
 
 	if (abs(accelerometerMagnitude() - 9.81) < 0.01) {
-		accWeight = 0.5; 
-		magWeight = 0.5; 
+		accWeight = 0.25; 
+		magWeight = 0.25; 
 
-		gyroWeight = 0; 
+		gyroWeight = 0.5; 
 	}
 	else {
 		gyroWeight = 1.0; 

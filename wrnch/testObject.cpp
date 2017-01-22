@@ -14,9 +14,9 @@ void testObject::update() {
 
 	glPushMatrix();
 	glRotated(-90, 1, 0, 0);		// Make z vector vertical instead of y
-	glTranslated(path->rX(), path->rY(), path->rZ());	//Move to current location
-	//glRotated(6.28 * path->clock->getTime(), 1, 0, 0);			
-	glRotated(rotation[0], rotation[1], rotation[2], rotation[3]); 
+	glTranslated(path->rX(), path->rY(), path->rZ());	//Move to current location	
+	if(rotation[0] != 0)
+		glRotated(rotation[0], rotation[1], rotation[2], rotation[3]); 
 	glutWireSphere(radius, slices, stacks);
 	glPopMatrix();
 }

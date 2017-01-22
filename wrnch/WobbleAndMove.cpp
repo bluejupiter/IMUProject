@@ -14,7 +14,7 @@ double WobbleAndMove::rX() {
 	else
 		x = cos(t); 
 	
-	return x; 
+	return x - 1; 
 };
 
 double WobbleAndMove::rY() { 

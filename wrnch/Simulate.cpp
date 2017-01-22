@@ -10,6 +10,7 @@
 #include "OrientationEstimator.h"
 #include "Wobble.h"
 #include "WobbleAndMove.h"
+#include "Stationary.h"
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
@@ -27,6 +28,10 @@ Clock * clock = Clock::getInstance();
 WobbleAndMove path; 
 MockIMU imuX(&path); 
 testObject test(0.5, 8, 8, &path);
+
+Stationary still; 
+MockIMU imuC(&still); 
+testObject testC(0.5, 8, 8, &still); 
 
 
 // Application-specific initialization: Set up global lighting parameters
@@ -53,6 +58,7 @@ void display() {
 		0.0, 1.0, 0.0);
 	checkerboard.draw();
 	test.update(); 
+	testC.update(); 
 	glFlush();
 	glutSwapBuffers();
 }
@@ -98,13 +104,7 @@ void simulate(int argc, char** argv) {
 	glutMainLoop();
 }
 
-std::string convert(Quaternion q) {
-	double angle = 2 * acos(q.w) * 180/3.14;
-	double s = sqrt(1 - q.w * q.w);
-	if (s < 0)
-		s *= -1; 
-	return "(" + std::to_string(angle) + ", " + std::to_string(q.x / s) + ", " + std::to_string(q.y / s) + ", " + std::to_string(q.z / s) + ")\n"; 
-}
+
 // Initializes GLUT and enters the main loop.
 int main(int argc, char** argv) {
 

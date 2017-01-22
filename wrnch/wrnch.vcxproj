@@ -122,6 +122,7 @@
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Simulate.cpp" />
     <ClCompile Include="SpinOnly.cpp" />
+    <ClCompile Include="Stationary.cpp" />
     <ClCompile Include="testObject.cpp" />
     <ClCompile Include="Wobble.cpp" />
     <ClCompile Include="Wobble.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="PositionEstimator.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="SpinOnly.h" />
+    <ClInclude Include="Stationary.h" />
     <ClInclude Include="testObject.h" />
     <ClInclude Include="WobbleAndMove.h" />
   </ItemGroup>

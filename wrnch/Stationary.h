@@ -1,11 +1,10 @@
 #pragma once
 #include "Motion.h"
 
-class WobbleAndMove : public Motion {
+class Stationary : public Motion {
 public:
-	Quaternion GlobalFrameAcc; 
 
-	WobbleAndMove();
+	Stationary();
 
 	double rX();
 	double rY();

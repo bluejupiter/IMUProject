@@ -119,6 +119,7 @@
     <ClCompile Include="OrientationEstimator.cpp" />
     <ClCompile Include="Motion.cpp" />
     <ClCompile Include="PositionEstimator.cpp" />
+    <ClCompile Include="Predict.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Simulate.cpp" />
     <ClCompile Include="SpinOnly.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="OrientationEstimator.h" />
     <ClInclude Include="Motion.h" />
     <ClInclude Include="PositionEstimator.h" />
+    <ClInclude Include="Predict.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="SpinOnly.h" />
     <ClInclude Include="Stationary.h" />

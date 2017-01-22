@@ -11,6 +11,8 @@
 #include "Wobble.h"
 #include "WobbleAndMove.h"
 #include "Stationary.h"
+#include "Mock3DSensor.h"
+#include "PositionEstimator.h"
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
@@ -25,13 +27,19 @@ Clock * clock = Clock::getInstance();
 
 //Add path to object and corresponding imu
 //SpinOnly path; 
-WobbleAndMove path; 
-MockIMU imuX(&path); 
-testObject test(0.5, 8, 8, &path);
+WobbleAndMove xpath; 
+MockIMU imuX(&xpath); 
+testObject test(0.5, 8, 8, &xpath);
+OrientationEstimator xOE(&imuX); 
 
-Stationary still; 
-MockIMU imuC(&still); 
-testObject testC(0.5, 8, 8, &still); 
+Stationary cpath; 
+MockIMU imuC(&cpath); 
+testObject testC(0.5, 8, 8, &cpath); 
+OrientationEstimator cOE(&imuC); 
+
+Mock3DSensor threeD(&xpath, &cpath); 
+PositionEstimator PE(xOE, cOE, threeD); 
+
 
 
 // Application-specific initialization: Set up global lighting parameters

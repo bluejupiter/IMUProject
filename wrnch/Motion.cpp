@@ -2,7 +2,7 @@
 #include <math.h>
 #include <iostream>
 
-Motion::Motion() {
+Motion::Motion(double x, double y, double z) : xOffset(x), yOffset(y), zOffset(z) {
 	downGlobalFrame.set(0, 0, 0, -1);
 	clock = Clock::getInstance();
 }

@@ -5,7 +5,7 @@ class WobbleAndMove : public Motion {
 public:
 	Quaternion GlobalFrameAcc; 
 
-	WobbleAndMove();
+	WobbleAndMove(double, double, double);
 
 	double rX();
 	double rY();

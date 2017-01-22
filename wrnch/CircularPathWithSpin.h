@@ -3,7 +3,7 @@
 
 class CircularPathWithSpin : public Motion {
 public: 
-	CircularPathWithSpin();
+	CircularPathWithSpin(double, double, double);
 
 	double rX(); 
 	double rY();

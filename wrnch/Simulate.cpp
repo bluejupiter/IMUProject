@@ -27,12 +27,12 @@ Clock * clock = Clock::getInstance();
 
 //Add path to object and corresponding imu
 //SpinOnly path; 
-WobbleAndMove xpath; 
+WobbleAndMove xpath(1, 0, 1); 
 MockIMU imuX(&xpath); 
 testObject test(0.5, 8, 8, &xpath);
 OrientationEstimator xOE(&imuX); 
 
-Stationary cpath; 
+Stationary cpath(-2, 0, 1); 
 MockIMU imuC(&cpath); 
 testObject testC(0.5, 8, 8, &cpath); 
 OrientationEstimator cOE(&imuC); 

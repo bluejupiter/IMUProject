@@ -1,19 +1,17 @@
 #include "CircularPathWithSpin.h"
 #include <math.h>
 
-CircularPathWithSpin::CircularPathWithSpin() {
-
-
+CircularPathWithSpin::CircularPathWithSpin(double x, double y, double z) : Motion(x, y, z) {
 }
 
 double CircularPathWithSpin::rX() {
-	return 2 * sin(clock->getTime());
+	return 2 * sin(clock->getTime()) + xOffset;
 } 
 double CircularPathWithSpin::rY() {
-	return 2 * cos(clock->getTime());
+	return 2 * cos(clock->getTime()) + yOffset;
 }
 double CircularPathWithSpin::rZ() {
-	return 1.0;
+	return zOffset;
 }
 
 double CircularPathWithSpin::xAcc() {

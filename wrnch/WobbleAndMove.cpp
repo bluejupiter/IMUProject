@@ -1,6 +1,6 @@
 #include "WobbleAndMove.h"
 
-WobbleAndMove::WobbleAndMove() {
+WobbleAndMove::WobbleAndMove(double x, double y, double z) : Motion(x,y,z) {
 	quat.set(1, 0, 0, 0); // w,x,y,z
 	change.set(cos(0.02), sin(0.02) / sqrt(3.0), sin(0.02) / sqrt(3.0), sin(0.02) / sqrt(3.0));
 	GlobalFrameAcc.set(0, 0, 0, 0); 
@@ -14,7 +14,7 @@ double WobbleAndMove::rX() {
 	else
 		x = cos(t); 
 	
-	return x - 1; 
+	return x + xOffset; 
 };
 
 double WobbleAndMove::rY() { 
@@ -25,10 +25,10 @@ double WobbleAndMove::rY() {
 	else
 		y = sin(t); 
 	
-	return y; 
+	return y + yOffset; 
 };
 
-double WobbleAndMove::rZ() { return 1; };
+double WobbleAndMove::rZ() { return zOffset; };
 
 double WobbleAndMove::xAcc() { 
 	Quaternion accLocalFrame = quat.intoBodyFrame(GlobalFrameAcc); 

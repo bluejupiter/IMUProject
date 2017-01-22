@@ -1,6 +1,6 @@
 #include "Wobble.h"
 
-Wobble::Wobble() {
+Wobble::Wobble(double x, double y, double z) : Motion(x, y, z) {
 	quat.set(1, 0, 0, 0); // w,x,y,z
 	change.set(cos(0.02), sin(0.02) / sqrt(3.0), sin(0.02) / sqrt(3.0), sin(0.02) / sqrt(3.0));
 };

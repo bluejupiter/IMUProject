@@ -3,7 +3,7 @@
 
 class Wobble : public Motion {
 public: 
-	Wobble(); 
+	Wobble(double, double, double); 
 
 	double rX();
 	double rY();

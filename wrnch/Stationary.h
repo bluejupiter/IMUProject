@@ -4,7 +4,7 @@
 class Stationary : public Motion {
 public:
 
-	Stationary();
+	Stationary(double, double, double);
 
 	double rX();
 	double rY();

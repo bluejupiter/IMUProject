@@ -3,7 +3,7 @@
 
 class SpinOnly : public Motion {
 public:
-	SpinOnly();
+	SpinOnly(double, double, double);
 
 	double rX();
 	double rY();

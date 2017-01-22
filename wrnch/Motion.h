@@ -9,8 +9,9 @@ public:
 	Quaternion quat; 
 	Quaternion change; 
 	Quaternion downGlobalFrame; //(unit vector, points straight down in global frame)
+	double xOffset, yOffset, zOffset; 
 
-	Motion();
+	Motion(double xOffset, double yOffset, double zOffset);
 	virtual double rX() = 0;		//x coordinate in global frame
 	virtual double rY() = 0;		//y coordinate in global frame
 	virtual double rZ() = 0;		//z coordinate in global frame 
@@ -29,5 +30,9 @@ public:
 	double gravityX();				//Gravity's contribution to the object frame's x-axis;
 	double gravityY();				//Gravity's contribution to the object frame's x-axis;
 	double gravityZ();				//Gravity's contribution to the object frame's x-axis;
+	
+	virtual double rXatTime() { return 0; };
+	virtual double rYatTime() { return 0; };
+	virtual double rZatTime() { return 0; };
 };
 

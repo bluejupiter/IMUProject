@@ -10,7 +10,7 @@ using std::vector;
 using std::string;
 
 class OrientationEstimator {
-	MockIMU * imu;
+	
 	Clock * clock; 
 	vector<double> North;          // First row of DCM matrix. "North" in the body frame
 	vector<double> West;			// Second row of DCM matrix. "West" in the body frame
@@ -18,6 +18,7 @@ class OrientationEstimator {
 	double timeIncrement;
 
 public:
+	MockIMU * imu;
 	OrientationEstimator(MockIMU * i);
 	void normalize(vector<double> &);
 	void orthonormalizeDCM();
@@ -30,6 +31,7 @@ public:
 	double accelerometerMagnitude(); 
 	void calibrate(); 
 	pair<Quaternion, double> queryEstimatedOrientation(); 
+	pair<Quaternion, double> queryIMUAcc(); 
 
 	//For debugging
 	string getNorth(); 

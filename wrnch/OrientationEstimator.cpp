@@ -213,6 +213,11 @@ pair<Quaternion, double> OrientationEstimator::queryEstimatedOrientation() {
 	return query; 
 }
 
+pair<Quaternion, double> OrientationEstimator::queryIMUAcc() {
+	Quaternion qAcc (0, imu->xAcc(), imu->yAcc(), imu->zAcc()); 
+	pair<Quaternion, double> query(qAcc, clock->getTime()); 
+}
+
 
 string OrientationEstimator::getNorth() {
 	return "[" + std::to_string(North[0]) + "] [" + std::to_string(North[1]) + "] [" + std::to_string(North[2]) + "]"; 

@@ -55,8 +55,12 @@ double WobbleAndMove::zAcc() {
 void WobbleAndMove::update() {
 	double t = clock->getTime();
 	if (t < 1) {
-		GlobalFrameAcc.x = -sin(t) * (3 * t * t - 2 * t * t * t) + cos(t) * (6 * t - 6 * t * t); 
-		GlobalFrameAcc.y = cos(t) * (3 * t * t - 2 * t * t * t) + sin(t) * (6 * t - 6 * t * t);
+		GlobalFrameAcc.x = (6 - 12 * t) * cos(t) - (3 * t * t - 2 * t * t * t) * cos(t) - 2 * (6 * t - 6 * t * t) * sin(t); 
+		GlobalFrameAcc.y = 2 * cos(t) * (6 * t - 6 * t * t) + sin(t) * (6 - 12 * t) - sin(t) * (3 * t * t - 2 * t * t * t);
+	}
+	else {
+		GlobalFrameAcc.x = -1 * cos(t); 
+		GlobalFrameAcc.y = -1 * sin(t); 
 	}
 	GlobalFrameAcc.z = 0; 
 	GlobalFrameAcc.w = 0; 

@@ -1,5 +1,7 @@
 #include "Mock3DSensor.h"
 #include <math.h>
+#include <iostream>
+using namespace std; 
 
 Mock3DSensor::Mock3DSensor(Motion * x, Motion * c) : xMotion(x), cMotion(c) {
 	clock = Clock::getInstance(); 
@@ -26,8 +28,10 @@ Quaternion Mock3DSensor::getApparentPositionOfX() {
 pair<Quaternion, double> Mock3DSensor::query3DSensor() {
 	// Return data sporadically
 	double r = ((double)rand() / (RAND_MAX));	// 0 < r < 1
-	if (r < 0.2) {
-		pair<Quaternion, double> noResult(getApparentPositionOfX(), clock->getTime());
+	//if (r < 0.2) {
+	if(r < 2){
+		pair<Quaternion, double> result(getApparentPositionOfX(), clock->getTime());
+		return result; 
 	}
 	else {
 		Quaternion empty(0, 0, 0, 0); 
@@ -42,6 +46,7 @@ double Mock3DSensor::error() {
 	r--;										// -1 < r < 1
 
 	double error = r* maxError;	
-	return error; 
+	//return error; 
+	return 0; 
 }
 

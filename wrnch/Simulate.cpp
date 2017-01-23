@@ -14,6 +14,7 @@
 #include "Mock3DSensor.h"
 #include "PositionEstimator.h"
 #include "Predict.h"
+using std::to_string; 
 
 // Colors
 GLfloat WHITE[] = { 1, 1, 1 };
@@ -28,12 +29,12 @@ Clock * clock = Clock::getInstance();
 
 //Add path to object and corresponding imu
 
-WobbleAndMove xpath(1, 0, 1); 
+WobbleAndMove xpath(2, 0, 1); 
 MockIMU imuX(&xpath); 
 testObject test(0.5, 8, 8, &xpath);
 OrientationEstimator xOE(&imuX); 
 
-Stationary cpath(-2, 0, 1); 
+Wobble cpath(-2, 0, 1); 
 MockIMU imuC(&cpath); 
 testObject testC(0.5, 8, 8, &cpath); 
 OrientationEstimator cOE(&imuC); 
@@ -162,7 +163,7 @@ int main(int argc, char** argv) {
 	MockIMU imuXTest(&xTest);
 	OrientationEstimator xOETest(&imuXTest);
 
-	Stationary cTest(-2, 0, 1);
+	Wobble cTest(-2, 0, 1);
 	MockIMU imuCTest(&cTest);
 	OrientationEstimator cOETest(&imuCTest);
 
@@ -170,19 +171,27 @@ int main(int argc, char** argv) {
 	PositionEstimator PETest(xOETest, cOETest, cam);
 
 	for (int i = 0; i < 50; i++) {
-		clock->tick(); 
-		xTest.update(); 
+		clock->tick();
+		xTest.update();
 		cTest.update();
-		cOETest.updateDCM(); 
-		xOETest.updateDCM(); 
-		PETest.update(); 
+		cOETest.updateDCM();
+		xOETest.updateDCM();
+		PETest.update();
 
 		std::cout << "X Quaternion is: " + xTest.quat.toString();
-		std::cout << "X OE Quaternion is: " + xOETest.getQuaternion().toString() + "\n";
+		std::cout << "X OE Quaternion is: " + xOETest.getQuaternion().toString();
+		std::cout << "X position is: " + to_string(xTest.rX()) + " " + to_string(xTest.rY()) + " " + to_string(xTest.rZ()) + "\n"; 
 
 		std::cout << "C Quaternion is: " + cTest.quat.toString();
-		std::cout << "C OE Quaternion is: " + cOETest.getQuaternion().toString() + "\n\n\n";
-		/*
+		std::cout << "C OE Quaternion is: " + cOETest.getQuaternion().toString();
+		std::cout << "C position is: " + to_string(cTest.rX()) + " " + to_string(cTest.rY()) + " " + to_string(cTest.rZ()) + "\n";
+
+		Quaternion apparentPosition = cam.getApparentPositionOfX(); 
+		std::cout << "X position (in C frame) is " + to_string(apparentPosition.x) + " " + to_string(apparentPosition.y) + " " + to_string(apparentPosition.z) + "\n";
+		apparentPosition = cTest.quat.intoGlobalFrame(apparentPosition); 
+		std::cout << "X position (in rel. to C) is " + to_string(apparentPosition.x) + " " + to_string(apparentPosition.y) + " " + to_string(apparentPosition.z) + "\n";
+		std::cout << "\n\n"; 
+		
 		if (!PETest.estimatedPositionGlobalFrame.empty()) {
 			pair<Quaternion, double> XrelativeToC = PETest.estimatedPositionGlobalFrame.front(); PETest.estimatedPositionGlobalFrame.pop(); 
 			double xP = XrelativeToC.first.x - cTest.rXatTime(XrelativeToC.second);
@@ -194,7 +203,7 @@ int main(int argc, char** argv) {
 			std::cout << "X position according to PE at time " + std::to_string(XrelativeToC.second)
 				+ "sec is [" + std::to_string(xP) + "][" + std::to_string(yP) + "][" + std::to_string(zP) + "]\n\n"; 
 		}
-		*/
+		
 	}
 
 

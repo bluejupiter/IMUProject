@@ -21,6 +21,14 @@ void Predict::update() {
 
 		pe.estimatedPositionGlobalFrame.pop(); 
 	}
+	else {
+		glPushMatrix();
+		glRotated(-90, 1, 0, 0);		// Make z vector vertical instead of y
+		//glTranslated(getX(), getY(), getZ());	//Move to current location	
+		glTranslated(0, 3, 2 );
+		glutSolidSphere(radius, slices, stacks);
+		glPopMatrix();
+	}
 }
 
 double Predict::getX() { 

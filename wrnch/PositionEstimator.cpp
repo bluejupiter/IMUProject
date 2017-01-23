@@ -1,10 +1,11 @@
 #include "PositionEstimator.h"
-
+#include <iostream>
+using namespace std; 
 PositionEstimator::PositionEstimator(OrientationEstimator& x, OrientationEstimator& c, Mock3DSensor& pos) : xOE(x), cOE(c), c3D(pos) {
 	clock = Clock::getInstance(); 
 	previousEstimatedPosition.first = c3D.getApparentPositionOfX(); 
 	previousEstimatedPosition.second = 0.0; // All clocks are synchronized at start of simulation to time = 0.0 seconds
-	lag = 0.2;
+	lag = 0.0;
 	imuPeriod = 1.0 / 30.0; 
 	predictPeriod = 0.2; 
 	cVelGlobalFrame = { 0, 0, 0 }; // Assume both objects start motionless
@@ -39,6 +40,7 @@ void PositionEstimator::gatherLagData() {
 
 void PositionEstimator::incorporate3Dposition() {
 	//Check for new data from buffer (with artificial lag added) and update position
+	cout << "In incorporate 3d position\n"; 
 	if (!cQueue3D.empty()) {
 		pair<Quaternion, double> position = cQueue3D.front();
 		if (clock->getTime() - position.second <= lag) {
